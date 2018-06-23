@@ -33,6 +33,14 @@ module.exports = {
       { from: './src/index.html', to: 'index.html' },
       { from: './src/devtools/devtools.html', to: 'devtools.html' },
       { from: './src/devtools/devtools.js', to: 'devtools.js' },
+      { from: './src/background.js', to: 'background.js' },
+      { from: './src/content-script.js', to: 'content-script.js' },
+      //backend stuff, move later
+      { from: './src/backend/common.js', to: 'common.js' },
+      { from: './src/backend/fiber-hook.js', to: 'fiber-hook.js' },
+      { from: './src/backend/installHook.js', to: 'installHook.js' },
+      { from: './src/backend/react-15-hook.js', to: 'react-15-hook.js' },
+            
     ]),
   ],
 };
