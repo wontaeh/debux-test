@@ -4,7 +4,11 @@
   "description": "test devtool",
   "version": "1.0",
   "permissions": [
-    "*://*/*"
+    "*://*/*",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "file:///*"
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [

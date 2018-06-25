@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import App from '../components/App';
-import Test from '../components/Test';
+import InfoWindow from '../components/InfoWindow';
+import '../styles/App.css';
+import NavBar from '../components/NavBar';
+import ChartWindow from '../components/ChartWindow';
 
 let curData;
+
+//styles
+document.body.style = 'background: #242d3d;';
 
 chrome.devtools.panels.create(
   'debux-test',
@@ -74,6 +80,7 @@ class App extends Component {
     let updateState = Object.keys(updateData.state);
     console.log('updateState: ', updateState);
     let updateComp = updateData.children[0].children;
+    
     if(updateState) {
       this.setState({
         // data: updateData,
@@ -82,22 +89,26 @@ class App extends Component {
       });
     }
   }
-
   render() {
     let states = this.state.state.map((el) => {
       return <div>{el}</div>
     });
     console.log(states);
     return (
-      <div>
+      
+      <div className='test'>
+        <NavBar/>
+        <div className="rowCols">
+        <ChartWindow treeType='Components:'/>
+        <ChartWindow treeType='Store:'/>
+        </div>
+        <InfoWindow/>
         <button onClick={this.handleClick}>Click</button>
         <br />
         Data: {this.state.data} <br />
         {states} <br />
         {this.state.components} <br />
         React version: {this.state.reactVersion}
-
-        <Test />
       </div>
     );
   }

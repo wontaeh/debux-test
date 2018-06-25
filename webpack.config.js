@@ -32,6 +32,10 @@ module.exports = {
           plugins: ['transform-class-properties']
         }
       },
+      {
+        test: /\.css/,
+        loaders: ['style-loader', 'css-loader'],
+      },
     ]
   },
   resolve: {
