@@ -5,7 +5,7 @@
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
 
-var __ReactSightDebugMode = (process.env.NODE_ENV === 'debug');
+var __ReactSightDebugMode = false;
 let __ReactSightStore;
 
 /** TODO - get objects to work
@@ -96,6 +96,7 @@ export const recur16 = (node, parentArr) => {
  *
  */
 export const traverse16 = (fiberDOM) => {
+  console.log('In traverse16 function');
   if (typeof fiberDOM === 'undefined') return;
   if (__ReactSightDebugMode) console.log('[ReactSight] traverse16 vDOM: ', fiberDOM);
   const components = [];
@@ -105,6 +106,7 @@ export const traverse16 = (fiberDOM) => {
     data: components,
     store: __ReactSightStore,
   };
+  console.log('data: ', data);
   data.data = data.data[0].children[0].children;
   const ReactSightData = { data: components, store: __ReactSightStore };
   const clone = JSON.parse(JSON.stringify(ReactSightData));

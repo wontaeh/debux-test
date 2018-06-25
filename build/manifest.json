@@ -1,17 +1,8 @@
 {
   "manifest_version": 2,
-
   "name": "debux-test",
   "description": "test devtool",
   "version": "1.0",
-
-  "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": true
-  },
-
   "permissions": [
     "*://*/*",
     "tabs",
@@ -21,12 +12,12 @@
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
-    "/installHook.js"
+    "installHook.js"
   ],
-  "content_scripts" : [
-    {
-      "matches" : ["<all_urls>"],
-      "js" : ["content-script.js"]
-    }
-  ]
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  }
 }

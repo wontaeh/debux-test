@@ -5,7 +5,7 @@
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
 
-var __ReactSightDebugMode = (process.env.NODE_ENV === 'debug');
+var __ReactSightDebugMode = false;
 let __ReactSightStore;
 
 /**
