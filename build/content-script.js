@@ -1,4 +1,4 @@
-alert("IN CONTENTSCRIPT.jS");
+console.log("IN CONTENTSCRIPT.jS");
 
 //  Created by Grant Kang, William He, and David Sally on 9/10/17.
 //  Copyright © 2018 React Sight. All rights reserved.
