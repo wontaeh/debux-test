@@ -88,12 +88,12 @@ class App extends Component {
       let treeData = [];
       this.makeTreeData(updateData, treeData);
       
-    if(updateState) {
-      this.setState({
-        data: treeData
-      });
+      if(updateState) {
+        this.setState({
+          data: treeData
+        });
+      }
     }
-
   }
   render() {
     // let displayArr = [];
