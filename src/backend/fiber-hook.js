@@ -1,12 +1,9 @@
-//  Created by Grant Kang, William He, and David Sally on 9/10/17.
-//  Copyright © 2018 React Sight. All rights reserved.
-
 /* eslint brace-style: off, camelcase: off, max-len: off, no-prototype-builtins: off, no-restricted-syntax: off, consistent-return: off, no-inner-declarations: off */
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
 
-var __ReactSightDebugMode = false;
-let __ReactSightStore;
+var _DebuxDebugMode = false;
+let _DebuxStore;
 
 /** TODO - get objects to work
   *
@@ -75,7 +72,7 @@ export const recur16 = (node, parentArr) => {
   // get store
   if (node.type && node.type.propTypes) {
     if (node.type.propTypes.hasOwnProperty('store')) {
-      __ReactSightStore = node.stateNode.store.getState();
+      _DebuxStore = node.stateNode.store.getState();
     }
   }
   newComponent.children = [];
@@ -98,18 +95,18 @@ export const recur16 = (node, parentArr) => {
 export const traverse16 = (fiberDOM) => {
   console.log('In traverse16 function');
   if (typeof fiberDOM === 'undefined') return;
-  if (__ReactSightDebugMode) console.log('[ReactSight] traverse16 vDOM: ', fiberDOM);
+  if (_DebuxDebugMode) console.log('[Debux] traverse16 vDOM: ', fiberDOM);
   const components = [];
   recur16(fiberDOM.current.stateNode.current, components);
-  if (__ReactSightDebugMode) console.log('[ReactSight] traverse16 data: ', components);
+  if (_DebuxDebugMode) console.log('[Debux] traverse16 data: ', components);
   const data = {
     data: components,
-    store: __ReactSightStore,
+    store: _DebuxStore,
   };
   data.data = data.data[0].children[0].children;
-  const ReactSightData = { data: components, store: __ReactSightStore };
-  const clone = JSON.parse(JSON.stringify(ReactSightData));
-  if (__ReactSightDebugMode) console.log('[ReactSight] retrieved data --> posting to content-scripts...: ', ReactSightData);
-  if (__ReactSightDebugMode) console.log('[ReactSight] SENDING -> ', clone);
+  const DebuxData = { data: components, store: _DebuxStore };
+  const clone = JSON.parse(JSON.stringify(DebuxData));
+  if (_DebuxDebugMode) console.log('[Debux] retrieved data --> posting to content-scripts...: ', DebuxData);
+  if (_DebuxDebugMode) console.log('[Debux] SENDING -> ', clone);
   window.postMessage(clone, '*');
 };

@@ -18,7 +18,7 @@
 .chartWindow {
     border: solid 0.5px;
     border-color: #4d92f9;
-    width: 270px;
+    width: 50%;
     height: 400px;
     margin: 2px;
 }
@@ -26,7 +26,8 @@
 .infoWindow {
     border: solid 0.5px;
     border-color: #4d92f9;
-    width: 472px;
+    /* width: 472px; */
+    width: 100%;
     height: 200px;
     margin: 2px;
 
@@ -41,6 +42,7 @@
     display:flex; 
     flex-direction:row;
     padding: 2px 2px 2px 2px;
+    margin-bottom: 0px;
     /* border-bottom: solid 0.5px #4d92f9;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;  */
@@ -51,11 +53,13 @@
     font-size: 12px;
     padding: 2px 2px 2px 2px;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-bottom: 0px;
 }
 
 .dropdown-content {
@@ -82,6 +86,17 @@ i {
   .arrowDown {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.button {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
 }
 
 /* .arrowDown {

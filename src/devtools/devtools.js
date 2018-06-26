@@ -117,7 +117,7 @@ class App extends Component {
       
       <div className='test'>
         <NavBar/>
-        <button onClick={this.handleClick}>Click</button>
+        <button className="button" onClick={this.handleClick}>Click</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
         <ChartWindow treeType='Store:'/>
