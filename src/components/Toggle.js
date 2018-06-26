@@ -1,6 +1,5 @@
 import React from 'react';
 import DropDown from './DropDown';
-import D3Tree from './D3Tree';
 
 
 const Toggle = (props) => {
@@ -8,7 +7,6 @@ const Toggle = (props) => {
         <div className='toggle'>
             <span>{props.treeType}</span>
             <DropDown/>
-            <D3Tree treeData = {props.treeData} />
         </div>
     );
 };
