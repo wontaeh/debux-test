@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import App from '../components/App';
+import Components from '../components/Components';
+import D3Tree from '../components/D3Tree';
 import InfoWindow from '../components/InfoWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 
 let curData;
+let dispalyComp;
 
 //styles
 document.body.style = 'background: #242d3d;';
@@ -16,10 +19,7 @@ chrome.devtools.panels.create(
   null, // icon
   'devtools.html',
   () => {
-    console.log('In panel create func');
     const port = chrome.extension.connect({ name: 'debux-test' });
-    console.log('port: ', port);
-    // establishes a connection between devtools and background page
     port.postMessage({
       name: 'connect',
       tabId: chrome.devtools.inspectedWindow.tabId,
@@ -28,7 +28,6 @@ chrome.devtools.panels.create(
     port.onMessage.addListener((msg) => {
       if (!msg.data) return; // abort if data not present, or if not of type object
       if (typeof msg !== 'object') return;
-      console.log('msg: ', msg);
       curData = msg; // assign global data object
     });
   }
@@ -40,30 +39,39 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reactVersion: null,
-      data: null,
-      state: [],
-      props: [],
-      components:[],
+      data: null
     };
   }
   
-
+  makeTreeData = (data, arr) => {
+    if(data) {
+      if(data.children){
+        if(data.children.length === 0) {
+          let newObj = {
+            name: data.name,
+            // state: data.state,
+            // props: data.props,
+            children: data.children
+          };
+          arr.push(newObj);
+          return ;
+        } else {
+          let newObj = {
+            name: data.name,
+            // state: data.state,
+            // props: data.props,
+            children: data.children
+          };
+          arr.push(newObj);
+          for(let i = 0; i < data.children.length; i++) {
+            this.makeTreeData(data.children[i], arr);
+          }
+        }
+      }
+    }
+  }
 
   handleClick = () => {
-    const query = 'window.__REACT_DEVTOOLS_GLOBAL_HOOK__';
-    let that = this;
-    chrome.devtools.inspectedWindow.eval( query, (result, isException) => { 
-      if (isException) {
-        console.log("err");
-      } else {
-        let instance = result._renderers[Object.keys(result._renderers)[0]];
-        // excuteInstallHook(result);
-        that.setState({
-          reactVersion: instance.version
-        });
-      }
-    });
     const port = chrome.extension.connect({ name: 'debux-test' });
     port.postMessage({
       name: 'connect',
@@ -74,26 +82,37 @@ class App extends Component {
       if (typeof msg !== 'object') return;
       curData = msg; // assign global data object
     });
-    let updateData = null;
-    if(curData) updateData = curData.data[0].children[0];
-    console.log('updateData: ',updateData);
-    let updateState = Object.keys(updateData.state);
-    console.log('updateState: ', updateState);
-    let updateComp = updateData.children[0].children;
-    
+    console.log('Data: ',curData);
+    if(curData.data) {
+      let updateData = curData.data[0];
+      let treeData = [];
+      this.makeTreeData(updateData, treeData);
+      
     if(updateState) {
       this.setState({
-        // data: updateData,
-        state: updateState,
-        // components: updateComp
+        data: treeData
       });
     }
+
   }
   render() {
-    let states = this.state.state.map((el) => {
-      return <div>{el}</div>
-    });
-    console.log(states);
+    // let displayArr = [];
+    // let displayComp = [];
+    // let currentData = this.state.data;
+    // if(currentData) {
+    //   // let displayData = JSON.parse(currentData).data[0];
+    //   let displayData = currentData.data[0];
+    //   this.displayData(displayData, displayArr);
+    //   for(let i = 0; i < displayArr.length; i++) {
+    //     displayComp.push(<Components key={'comp'+i} name={displayArr[i].name} state={displayArr[i].state} props={displayArr[i].props}/>);
+    //   }
+    // }
+    // let testArr = [];
+    // for(let i = 0; i < 5; i++) {
+    //   testArr.push(<Components key={i} />);
+    // }
+    // console.log('testArr: ',testArr);
+    // console.log('displayArr: ', displayArr);
     return (
       
       <div className='test'>
@@ -105,10 +124,7 @@ class App extends Component {
         <InfoWindow/>
         <button onClick={this.handleClick}>Click</button>
         <br />
-        Data: {this.state.data} <br />
-        {states} <br />
-        {this.state.components} <br />
-        React version: {this.state.reactVersion}
+        <D3Tree treeData={this.state.data}/>
       </div>
     );
   }
@@ -120,3 +136,4 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+

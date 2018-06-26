@@ -106,7 +106,6 @@ export const traverse16 = (fiberDOM) => {
     data: components,
     store: __ReactSightStore,
   };
-  console.log('data: ', data);
   data.data = data.data[0].children[0].children;
   const ReactSightData = { data: components, store: __ReactSightStore };
   const clone = JSON.parse(JSON.stringify(ReactSightData));
