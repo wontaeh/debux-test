@@ -10,9 +10,8 @@ class D3Tree extends Component {
   render() {
     console.log('Data: ', this.props.treeData);
     return (
-      <div id="treeWrapper" style={{width: '150em', height: '100em'}}>
-        Tree
-      {this.props.treeData && <Tree data={this.props.treeData} /> }
+      <div id="treeWrapper" style={{width: '90%', height: '70%'}}>
+        {this.props.treeData && <Tree data={this.props.treeData} /> }
       </div>
     );
   }

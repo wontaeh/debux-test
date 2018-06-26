@@ -88,7 +88,7 @@ class App extends Component {
       let treeData = [];
       this.makeTreeData(updateData, treeData);
       
-      if(updateState) {
+      if(treeData) {
         this.setState({
           data: treeData
         });
@@ -117,14 +117,14 @@ class App extends Component {
       
       <div className='test'>
         <NavBar/>
+        <button onClick={this.handleClick}>Click</button>
         <div className="rowCols">
-        <ChartWindow treeType='Components:'/>
+        <ChartWindow treeType='Components:' treeData={this.state.data}/>
         <ChartWindow treeType='Store:'/>
         </div>
         <InfoWindow/>
-        <button onClick={this.handleClick}>Click</button>
         <br />
-        <D3Tree treeData={this.state.data}/>
+        {/* <D3Tree treeData={this.state.data}/> */}
       </div>
     );
   }
