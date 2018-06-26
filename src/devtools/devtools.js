@@ -3,9 +3,16 @@ import ReactDOM from 'react-dom';
 // import App from '../components/App';
 import Components from '../components/Components';
 import D3Tree from '../components/D3Tree';
+import InfoWindow from '../components/InfoWindow';
+import '../styles/App.css';
+import NavBar from '../components/NavBar';
+import ChartWindow from '../components/ChartWindow';
 
 let curData;
 let dispalyComp;
+
+//styles
+document.body.style = 'background: #242d3d;';
 
 chrome.devtools.panels.create(
   'debux-test',
@@ -80,13 +87,14 @@ class App extends Component {
       let updateData = curData.data[0];
       let treeData = [];
       this.makeTreeData(updateData, treeData);
+      
+    if(updateState) {
       this.setState({
         data: treeData
       });
     }
 
   }
-
   render() {
     // let displayArr = [];
     // let displayComp = [];
@@ -106,7 +114,14 @@ class App extends Component {
     // console.log('testArr: ',testArr);
     // console.log('displayArr: ', displayArr);
     return (
-      <div>
+      
+      <div className='test'>
+        <NavBar/>
+        <div className="rowCols">
+        <ChartWindow treeType='Components:'/>
+        <ChartWindow treeType='Store:'/>
+        </div>
+        <InfoWindow/>
         <button onClick={this.handleClick}>Click</button>
         <br />
         <D3Tree treeData={this.state.data}/>
