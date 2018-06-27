@@ -38,7 +38,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      store: []
     };
   }
   
@@ -55,7 +56,7 @@ class App extends Component {
     data.children.forEach((child) => {
       this.makeTreeData(child, newObj.children);
     });
-    
+
   }
 
   filterDOM = (data, arr) => {
@@ -79,6 +80,10 @@ class App extends Component {
     }
   }
 
+  storeDataToTree = (data, arr) => {
+
+  }
+
   handleClick = (str) => {
     const port = chrome.extension.connect({ name: 'debux-test' });
     port.postMessage({
@@ -97,13 +102,24 @@ class App extends Component {
       console.log('before makeTreeData - Data: ', updateData);
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
-      
-      if(treeData) {
+
+      if(treeData.length) {
         this.setState({
           data: treeData
         });
       }
     }
+    if(false) {
+      let updateStore = '';
+      let storeData = [];
+      if(str === 'store') this.storeDataToTree(updateStore, storeData);
+      if(storeData.length) {
+        this.setState({
+          store: storeData
+        });
+      }
+    }
+
   }
   render() {
     return (
@@ -113,9 +129,11 @@ class App extends Component {
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
         <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
+        <span> </span>
+        <button className="button" onClick={()=>this.handleClick('store')}>Store</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
-        <ChartWindow treeType='Store:'/>
+        <ChartWindow treeType='Store:' storeData={this.state.store}/>
         </div>
         <InfoWindow/>
         <br />
