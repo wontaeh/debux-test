@@ -1,6 +1,4 @@
-  
-  $(document).ready(function () {
-    function BuildVerticalTree(treeData, treeContainerDom) {
+  function BuildVerticalTree(treeData, treeContainerDom) {
       let margin = { top: 40, right: 120, bottom: 20, left: 120 };
       let width = 960 - margin.right - margin.left;
       let height = 500 - margin.top - margin.bottom;
@@ -125,72 +123,4 @@
       }
     }
 
-  let treeData = {
-    "name": "Parent",
-    "children": [
-      {
-        "name": "Child",
-        "children": [
-          {
-            "name": "GrandChild",
-            "children": []
-          },
-          {
-            "name": "GrandChild",
-            "children": []
-          }
-        ]
-      },
-      {
-        "name": "Child",
-        "children": [
-          {
-            "name": "GrandChild",
-            "children": [
-              {
-                "name": "GGC",
-                "children": [
-                  {
-                    "name": "GGGC",
-                    "children": []
-                  },
-                  {
-                    "name": "GGGC",
-                    "children": []
-                  }
-                  ]
-              },
-              {
-                "name": "GGC",
-                "children": [
-                  {
-                    "name": "GGGC",
-                    "children": []
-                  }
-                  ]
-              },
-              {
-                "name": "GGC",
-                "children": []
-              },
-              {
-                "name": "GGC",
-                "children": []
-              }
-            ]
-          },
-          {
-            "name": "GrandChild",
-            "children": [
-              {
-                "name": "GGC",
-                "children": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  };
   BuildVerticalTree(treeData, "#tree");
-});

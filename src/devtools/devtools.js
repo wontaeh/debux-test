@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import App from '../components/App';
-import Components from '../components/Components';
 import D3Tree from '../components/D3Tree';
 import InfoWindow from '../components/InfoWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
+
 
 let curData;
 //styles

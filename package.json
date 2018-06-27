@@ -28,6 +28,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "d3": "^5.5.0",
     "react-d3-tree": "^1.10.6"
   }
 }
