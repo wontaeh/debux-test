@@ -9,8 +9,6 @@ import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 
 let curData;
-let dispalyComp;
-
 //styles
 document.body.style = 'background: #242d3d;';
 
