@@ -102,9 +102,10 @@ export const traverse16 = (fiberDOM) => {
   const data = {
     data: components,
     store: _DebuxStore,
+    reduxStore: window.__DEBUX_STORE_TRACKER__
   };
   data.data = data.data[0].children[0].children;
-  const DebuxData = { data: components, store: _DebuxStore };
+  const DebuxData = { data: components, store: _DebuxStore, reduxStore: window.__DEBUX_STORE_TRACKER__};
   const clone = JSON.parse(JSON.stringify(DebuxData));
   if (_DebuxDebugMode) console.log('[Debux] retrieved data --> posting to content-scripts...: ', DebuxData);
   if (_DebuxDebugMode) console.log('[Debux] SENDING -> ', clone);
