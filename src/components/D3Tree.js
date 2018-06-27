@@ -19,17 +19,23 @@ class D3Tree extends Component {
       fill: '#75b766',
       fontSize: '40',
     }
+    const svgStyleObj3 = {
+      fill: '#ed7bf7',
+      fontSize: '40',
+    }
+
+    //
     const styles = {
       // links: svgStyleObj,
       nodes: {
         node: {
-          circle: svgStyleObj,
+          circle: svgStyleObj2,
           name: svgStyleObj,
           attributes: svgStyleObj,
         },
         leafNode: {
-          circle: svgStyleObj2,
-          name: svgStyleObj2,
+          circle: svgStyleObj3,
+          name: svgStyleObj,
           attributes: svgStyleObj2,
         },
       },
