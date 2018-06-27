@@ -9,7 +9,6 @@ import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 
 let curData;
-let dispalyComp;
 
 //styles
 document.body.style = 'background: #242d3d;';
@@ -86,6 +85,7 @@ class App extends Component {
     if(curData.data) {
       let updateData = curData.data[0];
       let treeData = [];
+      console.log('before makeTreeData - Data: ', updateData);
       this.makeTreeData(updateData, treeData);
       
       if(treeData) {
@@ -96,35 +96,17 @@ class App extends Component {
     }
   }
   render() {
-    // let displayArr = [];
-    // let displayComp = [];
-    // let currentData = this.state.data;
-    // if(currentData) {
-    //   // let displayData = JSON.parse(currentData).data[0];
-    //   let displayData = currentData.data[0];
-    //   this.displayData(displayData, displayArr);
-    //   for(let i = 0; i < displayArr.length; i++) {
-    //     displayComp.push(<Components key={'comp'+i} name={displayArr[i].name} state={displayArr[i].state} props={displayArr[i].props}/>);
-    //   }
-    // }
-    // let testArr = [];
-    // for(let i = 0; i < 5; i++) {
-    //   testArr.push(<Components key={i} />);
-    // }
-    // console.log('testArr: ',testArr);
-    // console.log('displayArr: ', displayArr);
     return (
       
       <div className='test'>
         <NavBar/>
-        <button onClick={this.handleClick}>Click</button>
+        <button className="button" onClick={this.handleClick}>Click</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
         <ChartWindow treeType='Store:'/>
         </div>
         <InfoWindow/>
         <br />
-        {/* <D3Tree treeData={this.state.data}/> */}
       </div>
     );
   }

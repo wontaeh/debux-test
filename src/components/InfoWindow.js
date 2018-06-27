@@ -3,7 +3,7 @@ import React from 'react';
 const InfoWindow = (props) => {
   return (
     <div className="infoWindow">
-      Hello World!
+      Detailed Info:
     </div>
   );
 };

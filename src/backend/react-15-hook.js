@@ -1,12 +1,9 @@
-//  Created by Grant Kang, William He, and David Sally on 9/10/17.
-//  Copyright © 2018 React Sight. All rights reserved.
-
 /* eslint brace-style: off, camelcase: off, max-len: off, no-prototype-builtins: off, no-restricted-syntax: off, consistent-return: off, no-inner-declarations: off */
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
 
-var __ReactSightDebugMode = false;
-let __ReactSightStore;
+var __DebuxDebugMode = false;
+let __DebuxStore;
 
 /**
  * Parse Component's props. Handle nested objects and functions
@@ -76,7 +73,7 @@ export const traverseAllChildren = (component, parentArr) => {
     key: null,
   };
 
-  __ReactSightStore = getStore(component);
+  __DebuxStore = getStore(component);
 
   newComponent.state = getState(component);
   newComponent.key = getKey(component);
@@ -111,13 +108,13 @@ export const traverseAllChildren = (component, parentArr) => {
  * @param {array} components - array containing parsed virtual DOM
  */
 export const getData = (reactDOM) => {
-  if (__ReactSightDebugMode) console.log('vDOM', reactDOM);
+  if (__DebuxDebugMode) console.log('vDOM', reactDOM);
   const components = [];
   const rootElement = reactDOM.Mount._instancesByReactRootID[1]._renderedComponent;
   traverseAllChildren(rootElement, components);
-  const ReactSightData = { data: components, store: __ReactSightStore };
-  const clone = JSON.parse(JSON.stringify(ReactSightData));
-  if (__ReactSightDebugMode) console.log('SENDING -> ', ReactSightData);
+  const DebuxData = { data: components, store: __DebuxStore };
+  const clone = JSON.parse(JSON.stringify(DebuxData));
+  if (__DebuxDebugMode) console.log('SENDING -> ', DebuxData);
   window.postMessage(JSON.parse(JSON.stringify(clone)), '*');
 };
 
