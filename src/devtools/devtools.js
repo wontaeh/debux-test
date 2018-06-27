@@ -38,7 +38,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null, 
+      storeHistory: []
     };
   }
   
@@ -94,21 +95,37 @@ class App extends Component {
     if(curData.data) {
       let updateData = curData.data[0];
       let treeData = [];
+      console.log('REDUX-STORE: ', curData.reduxStore); //checking if we are getting the redux store
+      let updatedStore = curData.reduxStore;
+
       console.log('before makeTreeData - Data: ', updateData);
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
       
       if(treeData) {
         this.setState({
-          data: treeData
+          data: treeData,
+          storeHistory: updatedStore
         });
       }
     }
   }
   render() {
+
+    let storeVersions = null;
+    if (this.state.storeHistory) {
+      storeVersions = (
+        <ul>
+          {this.state.storeHistory.map((store, index) => {
+            return <li key={index}>Updated Store: {JSON.stringify(store[1], null, 2)}</li> 
+          })}
+        </ul>
+      );
+    }
     return (
       
       <div className='test'>
+        {storeVersions}
         <NavBar/>
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
