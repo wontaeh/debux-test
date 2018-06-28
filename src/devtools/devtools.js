@@ -56,7 +56,7 @@ class App extends Component {
     data.children.forEach((child) => {
       this.makeTreeData(child, newObj.children);
     });
-    
+
   }
 
   filterDOM = (data, arr) => {
@@ -77,6 +77,37 @@ class App extends Component {
       data.children.forEach((child) => {
         this.filterDOM(child, newObj.children);
       });
+    }
+  }
+
+  storeDataToTree = (data, arr) => {
+    console.log('storeData in storeDataToTree: ', data);
+    let storeStart = {
+      name : 'Store',
+      children : []
+    };
+    let keys = Object.keys(data);
+    keys.forEach((prop)=> {
+      let child = [];
+      this.recStore(data[prop], child);
+      let newObj = {
+        name: prop,
+        children: child
+      }
+      storeStart.children.push(newObj);
+    });
+    arr.push(storeStart);
+  }
+
+  recStore = (obj, child) => {
+    for(let prop in obj) {
+      if(Array.isArray(obj[prop])) {
+        obj[prop].forEach((el)=>{
+          let newObj = {};
+          newObj.name = el.text;
+          child.push(newObj);
+        })
+      }
     }
   }
 
@@ -101,14 +132,27 @@ class App extends Component {
       console.log('before makeTreeData - Data: ', updateData);
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
-      
-      if(treeData) {
+
+      if(treeData.length) {
         this.setState({
           data: treeData,
-          storeHistory: updatedStore
+          // storeHistory: updatedStore
         });
       }
     }
+    if(curData.reduxStore) {
+      let updatedStore = curData.reduxStore;
+      let temp = updatedStore[updatedStore.length - 1][1];
+      let storeData = [];
+      if(str === 'store') this.storeDataToTree(temp, storeData);
+      console.log('storeDataToTree: ', storeData);
+      if(storeData.length) {
+        this.setState({
+          storeHistory: storeData
+        });
+      }
+    }
+
   }
   render() {
 
@@ -130,9 +174,11 @@ class App extends Component {
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
         <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
+        <span> </span>
+        <button className="button" onClick={()=>this.handleClick('store')}>Store</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
-        <ChartWindow treeType='Store:'/>
+        <ChartWindow treeType='Store:' storeData={this.state.storeHistory}/>
         </div>
         <InfoWindow/>
         <br />
