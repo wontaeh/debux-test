@@ -41,34 +41,43 @@ class App extends Component {
   }
   
   makeTreeData = (data, arr) => {
-    if(data) {
-      if(data.children){
-        if(data.children.length === 0) {
-          let newObj = {
-            name: data.name,
-            // state: data.state,
-            // props: data.props,
-            children: data.children
-          };
-          arr.push(newObj);
-          return ;
-        } else {
-          let newObj = {
-            name: data.name,
-            // state: data.state,
-            // props: data.props,
-            children: data.children
-          };
-          arr.push(newObj);
-          for(let i = 0; i < data.children.length; i++) {
-            this.makeTreeData(data.children[i], arr);
-          }
-        }
-      }
+    if (data.name === undefined) return;
+    const newObj = {
+      name: data.name,
+      children: [],
+      id: data.id,
+      isDOM: data.isDOM,
+    };
+
+    arr.push(newObj);
+    data.children.forEach((child) => {
+      this.makeTreeData(child, newObj.children);
+    });
+    
+  }
+
+  filterDOM = (data, arr) => {
+    if (data.name === undefined) return;
+    const newObj = {
+      name: data.name,
+      children: [],
+      id: data.id,
+      isDOM: data.isDOM,
+    };
+
+    if (data.isDOM) {
+      data.children.forEach((child) => {
+        this.filterDOM(child, arr);
+      });
+    } else {
+      arr.push(newObj);
+      data.children.forEach((child) => {
+        this.filterDOM(child, newObj.children);
+      });
     }
   }
 
-  handleClick = () => {
+  handleClick = (str) => {
     const port = chrome.extension.connect({ name: 'debux-test' });
     port.postMessage({
       name: 'connect',
@@ -84,7 +93,8 @@ class App extends Component {
       let updateData = curData.data[0];
       let treeData = [];
       console.log('before makeTreeData - Data: ', updateData);
-      this.makeTreeData(updateData, treeData);
+      if(str === 'dom') this.makeTreeData(updateData, treeData);
+      if(str === 'component') this.filterDOM(updateData, treeData);
       
       if(treeData) {
         this.setState({
@@ -98,7 +108,9 @@ class App extends Component {
       
       <div className='test'>
         <NavBar/>
-        <button className="button" onClick={this.handleClick}>Click</button>
+        <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
+        <span> </span>
+        <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
         <ChartWindow treeType='Store:'/>
