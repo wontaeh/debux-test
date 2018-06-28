@@ -38,8 +38,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      store: []
+      data: null, 
+      storeHistory: []
     };
   }
   
@@ -81,7 +81,34 @@ class App extends Component {
   }
 
   storeDataToTree = (data, arr) => {
+    console.log('storeData in storeDataToTree: ', data);
+    let storeStart = {
+      name : 'Store',
+      children : []
+    };
+    let keys = Object.keys(data);
+    keys.forEach((prop)=> {
+      let child = [];
+      this.recStore(data[prop], child);
+      let newObj = {
+        name: prop,
+        children: child
+      }
+      storeStart.children.push(newObj);
+    });
+    arr.push(storeStart);
+  }
 
+  recStore = (obj, child) => {
+    for(let prop in obj) {
+      if(Array.isArray(obj[prop])) {
+        obj[prop].forEach((el)=>{
+          let newObj = {};
+          newObj.name = el.text;
+          child.push(newObj);
+        })
+      }
+    }
   }
 
   handleClick = (str) => {
@@ -99,32 +126,50 @@ class App extends Component {
     if(curData.data) {
       let updateData = curData.data[0];
       let treeData = [];
+      console.log('REDUX-STORE: ', curData.reduxStore); //checking if we are getting the redux store
+      let updatedStore = curData.reduxStore;
+
       console.log('before makeTreeData - Data: ', updateData);
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
 
       if(treeData.length) {
         this.setState({
-          data: treeData
+          data: treeData,
+          // storeHistory: updatedStore
         });
       }
     }
-    if(false) {
-      let updateStore = '';
+    if(curData.reduxStore) {
+      let updatedStore = curData.reduxStore;
+      let temp = updatedStore[updatedStore.length - 1][1];
       let storeData = [];
-      if(str === 'store') this.storeDataToTree(updateStore, storeData);
+      if(str === 'store') this.storeDataToTree(temp, storeData);
+      console.log('storeDataToTree: ', storeData);
       if(storeData.length) {
         this.setState({
-          store: storeData
+          storeHistory: storeData
         });
       }
     }
 
   }
   render() {
+
+    let storeVersions = null;
+    if (this.state.storeHistory) {
+      storeVersions = (
+        <ul>
+          {this.state.storeHistory.map((store, index) => {
+            return <li key={index}>Updated Store: {JSON.stringify(store[1], null, 2)}</li> 
+          })}
+        </ul>
+      );
+    }
     return (
       
       <div className='test'>
+        {storeVersions}
         <NavBar/>
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
@@ -133,7 +178,7 @@ class App extends Component {
         <button className="button" onClick={()=>this.handleClick('store')}>Store</button>
         <div className="rowCols">
         <ChartWindow treeType='Components:' treeData={this.state.data}/>
-        <ChartWindow treeType='Store:' storeData={this.state.store}/>
+        <ChartWindow treeType='Store:' storeData={this.state.storeHistory}/>
         </div>
         <InfoWindow/>
         <br />
