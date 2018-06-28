@@ -2,8 +2,8 @@
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
 
-var __DebuxDebugMode = false;
-let __DebuxStore;
+var _DebuxDebugMode = false;
+let _DebuxStore;
 
 /** TODO - get objects to work
   *
@@ -72,7 +72,7 @@ export const recur16 = (node, parentArr) => {
   // get store
   if (node.type && node.type.propTypes) {
     if (node.type.propTypes.hasOwnProperty('store')) {
-      __DebuxStore = node.stateNode.store.getState();
+      _DebuxStore = node.stateNode.store.getState();
     }
   }
   newComponent.children = [];
@@ -95,18 +95,19 @@ export const recur16 = (node, parentArr) => {
 export const traverse16 = (fiberDOM) => {
   console.log('In traverse16 function');
   if (typeof fiberDOM === 'undefined') return;
-  if (__DebuxDebugMode) console.log('[Debux] traverse16 vDOM: ', fiberDOM);
+  if (_DebuxDebugMode) console.log('[Debux] traverse16 vDOM: ', fiberDOM);
   const components = [];
   recur16(fiberDOM.current.stateNode.current, components);
-  if (__DebuxDebugMode) console.log('[Debux] traverse16 data: ', components);
+  if (_DebuxDebugMode) console.log('[Debux] traverse16 data: ', components);
   const data = {
     data: components,
-    store: __DebuxStore,
+    store: _DebuxStore,
+    reduxStore: window.__DEBUX_STORE_TRACKER__
   };
   data.data = data.data[0].children[0].children;
-  const DebuxData = { data: components, store: __DebuxStore };
+  const DebuxData = { data: components, store: _DebuxStore, reduxStore: window.__DEBUX_STORE_TRACKER__};
   const clone = JSON.parse(JSON.stringify(DebuxData));
-  if (__DebuxDebugMode) console.log('[Debux] retrieved data --> posting to content-scripts...: ', DebuxData);
-  if (__DebuxDebugMode) console.log('[Debux] SENDING -> ', clone);
+  if (_DebuxDebugMode) console.log('[Debux] retrieved data --> posting to content-scripts...: ', DebuxData);
+  if (_DebuxDebugMode) console.log('[Debux] SENDING -> ', clone);
   window.postMessage(clone, '*');
 };
