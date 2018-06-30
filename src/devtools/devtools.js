@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import App from '../components/App';
 import D3Tree from '../components/D3Tree';
 import InfoWindow from '../components/InfoWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 
-let curData;
 
+let curData;
 //styles
 document.body.style = 'background: #242d3d;';
 
