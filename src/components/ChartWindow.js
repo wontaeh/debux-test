@@ -5,9 +5,9 @@ import D3Tree from './D3Tree';
 const ChartWindow = (props) => {
     const displayTree = [];
     if(props.treeData) {
-        displayTree.push(<D3Tree key={'compTree'} treeData = {props.treeData} />);
+        displayTree.push(<D3Tree key={'compTree'} treeData = {props.treeData} onMouseOver={props.onMouseOver}/>);
     } else if(props.storeData && props.storeData.length) {
-        displayTree.push(<D3Tree key={'storeTree'} treeData = {props.storeData} />);
+        displayTree.push(<D3Tree key={'storeTree'} treeData = {props.storeData} onMouseOver={props.onMouseOver}/>);
     }
     return (
         <div className="chartWindow">
