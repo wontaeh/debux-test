@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tree from 'react-d3-tree';
+import Tree from ///
 // import { layout, select, behavior, event } from 'd3';
 
 
@@ -9,16 +9,6 @@ class D3Tree extends Component {
     Tree.defaultProps.orientation = 'vertical'
     // this.createD3Tree = this.createD3Tree.bind(this);
   }
-
-  handleOnMouseOverCb = () => {
-    // const { onMouseOver } = this.props;
-    // if (onMouseOver && typeof onMouseOver === 'function') {
-    //   const data = clone(this.state.data);
-    //   const matches = this.findNodesById(nodeId, data, []);
-    //   const targetNode = matches[0];
-    //   onMouseOver(clone(targetNode), evt);
-    console.log("This Name: ", );
-    }
 
   //   componentDidMount() {
   //     this.createD3Tree()
@@ -67,7 +57,7 @@ class D3Tree extends Component {
     console.log('Data: ', this.props.treeData);
     return (
       <div id="treeWrapper" style={{width:'98%', height:'95%'}}>
-        {this.props.treeData && <Tree onMouseOver={this.handleOnMouseOverCb} data={this.props.treeData} styles={styles}/> }
+        {this.props.treeData && <Tree data={this.props.treeData} styles={styles}/> }
       </div>
     );
   }
