@@ -37,7 +37,7 @@ class D3Tree extends Component {
     console.log('Data: ', this.props.treeData);
     return (
       <div id="treeWrapper" style={{width:'98%', height:'95%'}}>
-        {this.props.treeData && <Tree data={this.props.treeData} styles={styles}/> }
+        {this.props.treeData && <Tree data={this.props.treeData} styles={styles} onMouseOver={this.props.onMouseOver}/> }
       </div>
     );
   }
