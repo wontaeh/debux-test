@@ -70,8 +70,10 @@ export const recur16 = (node, parentArr) => {
   if (node.memoizedProps) newComponent.props = props16(node);
 
   // get store
+  // console.log('node: ', node);
   if (node.type && node.type.propTypes) {
     if (node.type.propTypes.hasOwnProperty('store')) {
+      // console.log('node.stateNode.store.getState(): ', node.stateNode.store.getState());
       _DebuxStore = node.stateNode.store.getState();
     }
   }
@@ -93,7 +95,7 @@ export const recur16 = (node, parentArr) => {
  *
  */
 export const traverse16 = (fiberDOM) => {
-  console.log('In traverse16 function');
+  // console.log('In traverse16 function');
   if (typeof fiberDOM === 'undefined') return;
   if (_DebuxDebugMode) console.log('[Debux] traverse16 vDOM: ', fiberDOM);
   const components = [];
