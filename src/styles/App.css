@@ -37,6 +37,21 @@
     list-style-type: none;
     color:#75b766;
 }
+
+/* shaf's CSS */
+.stateAndProps {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    background:#787878;
+    background: linear-gradient(to right, #FFFFFF, #787878);;
+    margin: 2px;
+    padding: 5px;
+    border: solid 0.5px;
+    border-radius: 15px;
+    border-color: #4d92f9;
+    width: 40%;
+}
 /* // */
 
 
