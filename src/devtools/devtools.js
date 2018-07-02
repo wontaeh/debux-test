@@ -38,7 +38,7 @@ class App extends Component {
     this.state = {
       data: null, 
       storeHistory: [],
-      props: null,
+      stateAndProps: [],
     };
   }
 
@@ -47,11 +47,9 @@ class App extends Component {
       console.log('data in props func: ', data);
       if (data.name === undefined) return;
       const propObjs = {
-        name: data.name,
-        attributes: {
-          props: data.props,
-          state: data.state
-        }
+        Component: data.name,
+        State: data.state,
+        Props: data.props,
       }
       if (data.isDOM) {
         data.children.forEach(child => {
@@ -205,8 +203,8 @@ class App extends Component {
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
       //
-      let propsData = [];
-      if(str === 'props') this.makePropsData(updateData, propsData);
+      let stateAndPropsData = [];
+      if(str === 'props') this.makePropsData(updateData, stateAndPropsData);
       //
       if(treeData.length) {
         this.setState({
@@ -214,9 +212,9 @@ class App extends Component {
           // storeHistory: updatedStore
         });
       }
-      if(propsData.length) {
+      if(stateAndPropsData.length) {
         this.setState({
-          props: propsData
+          stateAndProps: stateAndPropsData
         });
       }
     }
@@ -268,7 +266,7 @@ class App extends Component {
         <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver}/>
         <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
         </div>
-        <InfoWindow propsData={this.state.props}/>
+        <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
         <br />
       </div>
     );
