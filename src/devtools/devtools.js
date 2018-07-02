@@ -268,7 +268,7 @@ class App extends Component {
           <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
         </div>
         <div className="rowCols">
-        <InfoWindow propsData={this.state.props}/>
+        <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
         <LogWindow/>
         </div>
         <br />
