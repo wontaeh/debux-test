@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import D3Tree from '../components/D3Tree';
 import InfoWindow from '../components/InfoWindow';
+import LogWindow from '../components/LogWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
@@ -253,7 +254,7 @@ class App extends Component {
 
     return (
       
-      <div className='test'>
+      <div className='appWindow'>
         <NavBar/>
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
@@ -263,10 +264,13 @@ class App extends Component {
         <span> </span>
         <button className="button" onClick={this.handleClick.bind(this, 'props')}>Show Props</button>
         <div className="rowCols">
-        <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver}/>
-        <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
+          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver}/>
+          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
         </div>
-        <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
+        <div className="rowCols">
+        <InfoWindow propsData={this.state.props}/>
+        <LogWindow/>
+        </div>
         <br />
       </div>
     );
