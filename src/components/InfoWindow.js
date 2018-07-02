@@ -23,7 +23,7 @@ const InfoWindow = (props) => {
 
   return (
     <div className="infoWindow">
-      Detailed Info:
+      <span>Detailed Info: </span>
       <ul className="infoUL">
         {display}
       </ul>
