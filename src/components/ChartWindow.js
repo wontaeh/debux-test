@@ -11,7 +11,7 @@ const ChartWindow = (props) => {
     }
     return (
         <div className="chartWindow">
-            <Toggle treeType={props.treeType} treeData={props.treeData}/>
+            <Toggle treeType={props.treeType} treeData={props.treeData} dropDownHandleClick={props.dropDownHandleClick}/>
             {/* <D3Tree treeData = {props.treeData} /> */}
             {displayTree}
         </div>

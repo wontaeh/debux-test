@@ -3,7 +3,7 @@ import React from 'react';
 const LogWindow = () => {
     return (
         <div className="logWindow">
-            <span>Logs:</span>
+          Logs:  
         </div>
     );
 };
