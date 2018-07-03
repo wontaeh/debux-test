@@ -1,35 +1,15 @@
 import React, { Component } from 'react';
-import Tree from 'react-d3-tree';
+// import Tree from 'react-d3-tree';
+import Tree from './D3/Tree';
 // import { layout, select, behavior, event } from 'd3';
 
 
 class D3Tree extends Component {
   constructor(props) {
     super(props);
-    Tree.defaultProps.orientation = 'vertical'
-    // this.createD3Tree = this.createD3Tree.bind(this);
+    // Tree.defaultProps.orientation = 'vertical'
+
   }
-
-  handleOnMouseOverCb = () => {
-    // const { onMouseOver } = this.props;
-    // if (onMouseOver && typeof onMouseOver === 'function') {
-    //   const data = clone(this.state.data);
-    //   const matches = this.findNodesById(nodeId, data, []);
-    //   const targetNode = matches[0];
-    //   onMouseOver(clone(targetNode), evt);
-    console.log("This Name: ", );
-    }
-
-  //   componentDidMount() {
-  //     this.createD3Tree()
-  //  }
-  //   componentDidUpdate() {
-  //     this.createD3Tree()
-  //  }
-  //   createD3Tree(treeData) {
-  //   }
-    
-
   
   render() {
     const svgStyleObj = {
@@ -63,11 +43,12 @@ class D3Tree extends Component {
         },
       },
     };
-  
-    console.log('Data: ', this.props.treeData);
+    const { treeData, storeTreeData, onMouseOver, onMouseOverStore, onMouseOutStore } = this.props;
+
     return (
       <div id="treeWrapper" style={{width:'98%', height:'95%'}}>
-        {this.props.treeData && <Tree data={this.props.treeData} styles={styles} onMouseOver={this.props.onMouseOver}/> }
+        {this.props.treeData && <Tree data={treeData} styles={styles} onMouseOver={onMouseOver}/> }
+        {this.props.storeTreeData && <Tree data={storeTreeData} styles={styles} onMouseOverStore={onMouseOverStore} onMouseOutStore={onMouseOutStore}/>}
       </div>
     );
   }
