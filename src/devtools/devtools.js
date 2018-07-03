@@ -249,6 +249,10 @@ class App extends Component {
   onMouseOver = (nodeId, evt) => {
     console.log("nodeId: ", nodeId, " evt: ", evt);
   }
+  //
+  dropDownHandleClick = () => {
+    console.log("Drop Down Handle Click Was Clicked");
+  }
 
   render() {
 
@@ -264,8 +268,8 @@ class App extends Component {
         <span> </span>
         <button className="button" onClick={this.handleClick.bind(this, 'props')}>Show Props</button>
         <div className="rowCols">
-          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver}/>
-          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
+          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClick}/>
+          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClick}/>
         </div>
         <div className="rowCols">
         <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>

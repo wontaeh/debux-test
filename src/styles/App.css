@@ -28,7 +28,19 @@
     border: solid 0.5px;
     border-color: #4d92f9;
     /* width: 472px; */
-    width: 49%;
+    width: 50%;
+    height: 200px;
+    margin: 2px;
+    /* height: 50%; */
+    padding: 2px 2px 2px 2px;
+    overflow:auto;
+}
+
+.logWindow {
+    border: solid 0.5px;
+    border-color: #4d92f9;
+    /* width: 472px; */
+    width: 50%;
     height: 200px; 
     /* height: 50%; */
     margin: 2px 2px 2px 2px;
@@ -40,12 +52,19 @@
     border: solid 0.5px;
     border-color: #4d92f9;
     /* width: 472px; */
-    width: 49%;
+    width: 50%;
     height: 200px; 
     /* height: 50%; */
-    margin: 2px 2px 2px 2px;
-    padding: 2px 2px 2px 2px;
+    margin: 2px;
     overflow:auto;
+}
+
+.infoWindow span{
+    margin: 2px 2px 2px 2px;  
+}
+
+.logWindow span{
+    margin: 2px 2px 2px 2px; 
 }
 
 .infoUL li {
@@ -55,15 +74,16 @@
 
 /* shaf's CSS */
 .stateAndProps {
-    color: black;
+    color: #75b766;
     font-weight: bold;
     font-size: 12px;
-    background:#787878;
-    background: linear-gradient(to right, #FFFFFF, #787878);;
+    /* background:#787878;
+    background: linear-gradient(to right, #FFFFFF, #787878);; */
     margin: 2px;
     padding: 5px;
-    border: solid 0.5px;
-    border-radius: 15px;
+    /* border: solid 0.5px; */
+    border-bottom: solid 0.5px;
+    /* border-radius: 15px; */
     border-color: #4d92f9;
     width: 90%;
 }
