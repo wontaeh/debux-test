@@ -6,7 +6,7 @@ const Toggle = (props) => {
     return (
         <div className='toggle'>
             <span>{props.treeType}</span>
-            <DropDown/>
+            <DropDown dropDownHandleClick={props.dropDownHandleClick}/>
         </div>
     );
 };

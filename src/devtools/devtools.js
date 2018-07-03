@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import D3Tree from '../components/D3Tree';
 import InfoWindow from '../components/InfoWindow';
+import LogWindow from '../components/LogWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
@@ -33,18 +35,17 @@ class App extends Component {
     this.state = {
       data: null, 
       storeHistory: [],
-      props: null,
+      stateAndProps: []
     };
   }
 
   makePropsData = (data, arr) => {
+    console.log('In makePropsData - data: ', data);
     if (data.name === undefined) return;
     const propObjs = {
-      name: data.name,
-      attributes: {
-        props: data.props,
-        state: data.state
-      }
+      Component: data.name,
+      State: data.state,
+      Props: data.props,
     }
     if (data.isDOM) {
       data.children.forEach(child => {
@@ -65,6 +66,8 @@ class App extends Component {
       children: [],
       id: data.id,
       isDOM: data.isDOM,
+      state: data.state,
+      props: data.props,
     };
     arr.push(newObj);
     data.children.forEach((child) => {
@@ -80,6 +83,8 @@ class App extends Component {
       children: [],
       id: data.id,
       isDOM: data.isDOM,
+      state: data.state,
+      props: data.props,
     };
 
     if (data.isDOM) {
@@ -126,7 +131,8 @@ class App extends Component {
           obj[key].forEach((el)=>{
             let newObj2 = {
               name: key,
-              children: []
+              children: [],
+              detail: el,
             }
             if(typeof el === 'object') {
               this.recStore(el, newObj2.children);
@@ -139,8 +145,10 @@ class App extends Component {
         } else {
           let newObj = {
             name: key,
-            children: []
+            children: [],
+            detail: {},
           };
+          newObj.detail[key] = obj[key]; 
           child.push(newObj);
         }
       }
@@ -165,22 +173,23 @@ class App extends Component {
       let propsData = [];
       if(str === 'dom') this.makeTreeData(updateData, treeData);
       if(str === 'component') this.filterDOM(updateData, treeData);
-      if(str === 'props') this.makePropsData(updateData, propsData);
+
+      let stateAndPropsData = [];
+      if(str === 'props') this.makePropsData(updateData, stateAndPropsData);
       if(treeData.length) {
         this.setState({
           data: treeData,
         });
       }
-      if(propsData.length) {
+      if(stateAndPropsData.length) {
         this.setState({
-          props: propsData
+          stateAndProps: stateAndPropsData
         });
       }
     }
 
     if(curData.store){
       let storeData = [];
-      let temp = curData.store;
       if(str === 'store') this.storeDataToTree(curData.store, storeData);
       if(storeData.length) {
         this.setState({
@@ -191,12 +200,42 @@ class App extends Component {
   }
 
   onMouseOver = (nodeId, evt) => {
+    const propObjs = {
+      Component: nodeId.name,
+      State: nodeId.state,
+      Props: nodeId.props,
+    }
+    this.setState({
+      stateAndProps: [propObjs]
+    });
+  }
+
+  onMouseOverStore = (nodeId, evt) => {
     console.log("nodeId: ", nodeId, " evt: ", evt);
+    const propObjs = {};
+    const detailInfo = nodeId.detail;
+    if(detailInfo) {
+      for(let key in detailInfo) {
+        propObjs[key] = detailInfo[key];
+      }
+    } else {
+      propObjs.name = nodeId.name;
+    }
+    this.setState({
+      stateAndProps: [propObjs]
+    });
+  }
+  onMouseOutStore = () => {
+    console.log('onMouseOut!');
+  }
+  //
+  dropDownHandleClick = () => {
+    console.log("Drop Down Handle Click Was Clicked");
   }
 
   render() {
     return (
-      <div className='test'>
+      <div className='appWindow'>
         <NavBar/>
         <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
@@ -206,10 +245,13 @@ class App extends Component {
         <span> </span>
         <button className="button" onClick={this.handleClick.bind(this, 'props')}>Show Props</button>
         <div className="rowCols">
-        <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver}/>
-        <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOver={this.onMouseOver}/>
+          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClick}/>
+          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOverStore={this.onMouseOverStore} onMouseOutStore={this.onMouseOutStore} dropDownHandleClick={this.dropDownHandleClick}/>
         </div>
-        <InfoWindow propsData={this.state.props} />
+        <div className="rowCols">
+          <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
+          <LogWindow/>
+        </div>
         <br />
       </div>
     );

@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-// import Tree from 'react-d3-tree';
-import Tree from './D3/Tree';
+import Tree from ///
 // import { layout, select, behavior, event } from 'd3';
 
 
 class D3Tree extends Component {
   constructor(props) {
     super(props);
-    // Tree.defaultProps.orientation = 'vertical'
-
+    Tree.defaultProps.orientation = 'vertical'
+    // this.createD3Tree = this.createD3Tree.bind(this);
   }
+
+  //   componentDidMount() {
+  //     this.createD3Tree()
+  //  }
+  //   componentDidUpdate() {
+  //     this.createD3Tree()
+  //  }
+  //   createD3Tree(treeData) {
+  //   }
+    
+
   
   render() {
     const svgStyleObj = {
@@ -43,12 +53,11 @@ class D3Tree extends Component {
         },
       },
     };
-    const { treeData, storeTreeData, onMouseOver, onMouseOverStore, onMouseOutStore } = this.props;
-
+  
+    console.log('Data: ', this.props.treeData);
     return (
       <div id="treeWrapper" style={{width:'98%', height:'95%'}}>
-        {this.props.treeData && <Tree data={treeData} styles={styles} onMouseOver={onMouseOver}/> }
-        {this.props.storeTreeData && <Tree data={storeTreeData} styles={styles} onMouseOverStore={onMouseOverStore} onMouseOutStore={onMouseOutStore}/>}
+        {this.props.treeData && <Tree data={this.props.treeData} styles={styles}/> }
       </div>
     );
   }

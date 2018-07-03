@@ -5,8 +5,8 @@ const DropDown = (props) => {
       <div className="dropdown">
         <span><i className="arrowDown"></i></span>
         <div className="dropdown-content">
-            <p>Tree</p>
-            <p>Raw</p>
+            <p onClick={()=>props.dropDownHandleClick()}>Tree</p>
+            <p onClick={()=>props.dropDownHandleClick()}>Raw</p>
         </div>
     </div>
     );

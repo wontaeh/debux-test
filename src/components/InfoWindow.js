@@ -1,34 +1,24 @@
 import React from 'react';
+import StateAndProps from './StateAndProps';
 
 const InfoWindow = (props) => {
+  let stateAndPropsList = null;
 
-  let propsData = props.propsData;
-  let display = [];
-  if(propsData) {
-    for(let i = 0; i <propsData.length; i++){
-      for(let key in propsData[i]){
-        if(key === 'name') {
-          display.push(<li>Component: {propsData[i][key]} </li>);
-        }
-        if(key === 'attributes'){
-          for(let key2 in propsData[i][key]) {
-            display.push(<li>{key2}:{JSON.stringify(propsData[i][key][key2], null, 2)}</li>);
-          }
-        }
-      }
-      display.push(<br />);
-    }
+  if (props.allStateAndPropsData.length) {
+    stateAndPropsList = props.allStateAndPropsData.map((propObj, index) => {
+      return <StateAndProps stateAndProps={propObj} key={index}/>
+    });
+    // stateAndPropsList = props.allStateAndPropsData.map((propObj, index) => {
+    //   return <pre className='stateAndProps' key={index}> {JSON.stringify(propObj, undefined, null)} </pre>
+    // });
   }
   
-
   return (
-    <div className="infoWindow">
+    <div className='infoWindow'> 
       Detailed Info:
-      <ul className="infoUL">
-        {display}
-      </ul>
+      {stateAndPropsList}
     </div>
-  );
+  )
 };
 
 export default InfoWindow;
