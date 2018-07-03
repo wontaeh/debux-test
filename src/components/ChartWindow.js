@@ -12,7 +12,6 @@ const ChartWindow = (props) => {
     return (
         <div className="chartWindow">
             <Toggle treeType={props.treeType} treeData={props.treeData}/>
-            {/* <D3Tree treeData = {props.treeData} /> */}
             {displayTree}
         </div>
     );

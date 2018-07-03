@@ -4,7 +4,7 @@ import Tree from 'react-d3-tree';
 class D3Tree extends Component {
   constructor(props) {
     super(props);
-    Tree.defaultProps.orientation = 'vertical'
+    // Tree.defaultProps.orientation = 'vertical'
 
   }
   

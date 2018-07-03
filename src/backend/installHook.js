@@ -37,8 +37,10 @@ if (!__DebuxHasRun) {
       return;
     }
     // React fiber (16+)
+  
     if (instance && instance.version) {
       __Debux_ReactVersion = instance.version;
+      console.log('version(16+): ', instance.version);
       if (__DebuxDebugMode) console.log('version: ', __Debux_ReactVersion);
       devTools.onCommitFiberRoot = (function (original) {
         return function (...args) {
@@ -51,6 +53,7 @@ if (!__DebuxHasRun) {
     }
     // React 15 or lower
     else if (instance && instance.Reconciler) {
+      console.log('version(15-): ', instance);
       // hijack receiveComponent method which runs after a component is rendered
       instance.Reconciler.receiveComponent = (function (original) {
         return function (...args) {
