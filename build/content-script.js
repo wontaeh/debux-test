@@ -2,7 +2,6 @@
 //  Copyright © 2018 React Sight. All rights reserved.
 /** function to inject traversal script into running tab's context */
 function injectScript(file, node) {
-  console.log('injectScript is invoked');
   const th = document.getElementsByTagName(node)[0];
   const s = document.createElement('script');
   s.setAttribute('type', 'text/javascript');
