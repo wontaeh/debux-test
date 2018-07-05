@@ -8,7 +8,6 @@ class D3Tree extends Component {
   constructor(props) {
     super(props);
     // Tree.defaultProps.orientation = 'vertical'
-
   }
   
   render() {

@@ -7,7 +7,9 @@ class MainDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stateAndProps: []
+      datailInfo: [],
+      displayTreeL: 'Tree', // Default
+      displayTreeR: 'Tree', // Dafault
     };
   }
 
@@ -18,7 +20,7 @@ class MainDisplay extends Component {
       Props: nodeId.props,
     }
     this.setState({
-      stateAndProps: [propObjs]
+      datailInfo: [propObjs]
     });
   }
 
@@ -33,20 +35,44 @@ class MainDisplay extends Component {
       propObjs.name = nodeId.name;
     }
     this.setState({
-      stateAndProps: [propObjs]
+      datailInfo: [propObjs]
     });
   }
+
+  dropDownHandleClickL = (type) => {
+    this.setState({
+      displayTreeL: type,
+    });
+  }
+  dropDownHandleClickR = (type) => {
+    this.setState({
+      displayTreeR: type,
+    });
+  }
+
 
   render() {
     return (
       <div>
         <div className="rowCols">
-          <ChartWindow treeType='Components:' treeData={this.props.treeData} onMouseOver={this.onMouseOver} dropDownHandleClick={this.props.dropDownHandleClick}/>
-          <ChartWindow treeType='Store:' storeData={this.props.storeData} onMouseOverStore={this.onMouseOverStore} dropDownHandleClick={this.props.dropDownHandleClick}/>
+          <ChartWindow 
+            treeType='Components:' 
+            treeData={this.props.treeData} 
+            onMouseOver={this.onMouseOver} 
+            dropDownHandleClick={this.dropDownHandleClickL} 
+            displayType={this.state.displayTreeL} 
+            stateAndProps={this.props.stateAndProps}/>
+          <ChartWindow 
+            treeType='Store:' 
+            storeData={this.props.storeData} 
+            onMouseOverStore={this.onMouseOverStore} 
+            dropDownHandleClick={this.dropDownHandleClickR} 
+            displayType={this.state.displayTreeR} 
+            stateAndPropsStore={this.props.stateAndPropsStore}/>
         </div>
         <div className="rowCols">
-          <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
-          <LogWindow/>
+          <InfoWindow allStateAndPropsData={this.state.datailInfo}/>
+          <LogWindow memory={this.props.memory}/>
         </div>
       </div>
     );
