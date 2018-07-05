@@ -73,7 +73,7 @@ export const traverseAllChildren = (component, parentArr) => {
     key: null,
   };
 
-  __DebuxStore = getStore(component);
+  if(getStore(component)) __DebuxStore = getStore(component);
 
   newComponent.state = getState(component);
   newComponent.key = getKey(component);
@@ -148,6 +148,7 @@ export const getState = (component) => {
 };
 
 export const getStore = (component) => {
+  // console.log('In react-15-hook, component: ', component);
   // call getState() on react-redux.connect()
   if (component._currentElement.type && component._currentElement.type.propTypes && component._currentElement.type.propTypes.hasOwnProperty('store')) {
     return component._instance.store.getState();

@@ -8,9 +8,6 @@ const InfoWindow = (props) => {
     stateAndPropsList = props.allStateAndPropsData.map((propObj, index) => {
       return <StateAndProps stateAndProps={propObj} key={index}/>
     });
-    // stateAndPropsList = props.allStateAndPropsData.map((propObj, index) => {
-    //   return <pre className='stateAndProps' key={index}> {JSON.stringify(propObj, undefined, null)} </pre>
-    // });
   }
   
   return (
