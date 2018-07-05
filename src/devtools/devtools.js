@@ -37,8 +37,8 @@ class App extends Component {
       treeData: null, 
       storeHistory: [],
       stateAndProps: [],
-      displayTypeR: 'Tree',
-      displayTypeL: 'Tree'
+      stateAndPropsStore: [],
+      memory: [],
     };
   }
 
@@ -241,9 +241,8 @@ class App extends Component {
     }
     return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
-  
+
   render() {
-    console.log("this.state.stateAndProps:", this.state.stateAndProps)
     return (
       <div className='appWindow'>
         <NavBar/>

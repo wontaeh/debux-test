@@ -3,11 +3,9 @@ import Toggle from './Toggle'
 import D3Tree from './D3Tree';
 import StateAndProps from './StateAndProps';
 
-
 const ChartWindow = (props) => {
     let displayTree = [];
     let stateAndPropsList = [];
-    //console.log("PROPS:", props.stateAndProps);
     if(props.displayType === 'Tree') {
         if(props.treeData) {
             displayTree.push(<D3Tree key={'compTree'} treeData = {props.treeData} onMouseOver={props.onMouseOver}/>);

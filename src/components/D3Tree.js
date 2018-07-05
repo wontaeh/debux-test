@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Tree from 'react-d3-tree';
-//import Tree from './D3/Tree/index.js';
-// import { layout, select, behavior, event } from 'd3';
 
 
 class D3Tree extends Component {
@@ -43,7 +41,7 @@ class D3Tree extends Component {
       },
     };
     const { treeData, storeTreeData, onMouseOver, onMouseOverStore, onMouseOutStore } = this.props;
-
+    console.log('props treeData: ', treeData);
     return (
       <div id="treeWrapper" style={{width:'98%', height:'95%'}}>
         {this.props.treeData && <Tree data={treeData} styles={styles} onMouseOver={onMouseOver}/> }
