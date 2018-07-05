@@ -11,7 +11,7 @@ const connections = {};
 chrome.extension.onConnect.addListener((devToolsConnection) => {
   // assign the listener function to a variable so we can remove it later
   var devToolsListener = (message, sender, sendResponse) => {
-    // Inject a content script into the identified tab
+    // Inject a content-script
     chrome.tabs.executeScript(message.tabId, { file: 'content-script.js' });
   };
   // add the listener
@@ -54,7 +54,7 @@ chrome.extension.onMessage.addListener(function (req, sender, res) {
     let tabId = sender.tab.id;
     if (tabId in connections) {
       connections[tabId].postMessage(req);
-    } else console.log('WARNING:: Tab not found in connection list');
-  } else console.log('WARNING:: sender.tab not defined');
+    }
+  }
   return true;
 });
