@@ -1,3 +1,7 @@
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
 /* eslint brace-style: off, camelcase: off, max-len: off, no-prototype-builtins: off, no-restricted-syntax: off, consistent-return: off, no-inner-declarations: off */
 import { traverse16 } from './fiber-hook';
 import { getData } from './react-15-hook';

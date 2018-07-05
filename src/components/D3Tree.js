@@ -1,3 +1,7 @@
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
 import React, { Component } from 'react';
 import Tree from 'react-d3-tree';
 
@@ -18,17 +22,6 @@ class D3Tree extends Component {
   }
   
   render() {
-    const svgStyleObj = {
-      // fontColor: 'white',
-      // stroke: '#53C4C1',
-      fill: '#90d9ed',
-      fontSize: '40',
-    };
-    const svgStyleObj2 = {
-      fill: '#75b766',
-      fontSize: '40',
-    }
-    //
     const styles = {
       nodes: {
         node: {
@@ -62,9 +55,8 @@ class D3Tree extends Component {
       },
     };
     const { treeData, storeTreeData, onMouseOver, onMouseOverStore, onMouseOutStore } = this.props;
-
     return (
-      <div class="treeWrapper" style={{width:'98%', height:'95%'}} ref={tc => (this.treeContainer = tc)}>
+      <div class="treeWrapper" style={{width:'98%', height:'375px'}} ref={tc => (this.treeContainer = tc)}>
         {this.props.treeData && 
           <Tree 
             data={treeData} 
@@ -79,7 +71,7 @@ class D3Tree extends Component {
               min: 0.1, 
               max: 1
             }}
-            zoom={0.4}
+            zoom={0.5}
           />}
         {this.props.storeTreeData && 
           <Tree 
@@ -95,7 +87,7 @@ class D3Tree extends Component {
               min: 0.1, 
               max: 1
             }}
-            zoom={0.4}
+            zoom={0.5}
           />}
       </div>
     );

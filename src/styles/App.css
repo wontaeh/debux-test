@@ -1,4 +1,8 @@
 
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
 .appWindow {
     /* background-color: #242d3d; */
     color: #4d92f9;
@@ -20,8 +24,17 @@
     border-color: #4d92f9;
     width: 50%;
     height: 400px;
-    /* height: 100%; */
+
+    /* min-height: 400px;
+    height: 100%; */
+
     margin: 2px;
+
+    /* overflow: auto; */
+}
+
+.chartWindowDisplay {
+    height: 375px;
     overflow: auto;
 }
 
@@ -93,6 +106,9 @@
     width: 90%;
 }
 /* // */
+.stateAndPropsDiv {
+    overflow: auto;
+}
 
 
 .rowCols{
@@ -104,7 +120,9 @@
     display:flex; 
     flex-direction:row;
     padding: 2px 2px 2px 2px;
+    margin-top: 0px;
     margin-bottom: 0px;
+    height: 18px;
     /* border-bottom: solid 0.5px #4d92f9;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;  */
@@ -122,6 +140,7 @@
     position: relative;
     display: inline-block;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .dropdown-content {
@@ -132,6 +151,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+    cursor: pointer;
 }
 
 .dropdown:hover .dropdown-content {
@@ -142,6 +162,7 @@
     color: #4d92f9;
     padding: 12px 16px;
     display: block;
+    cursor: pointer;
 }
 
 .dropdown-content p:hover {
@@ -171,6 +192,42 @@ i {
     font-size: 10px;
 }
 
+.scrollbar {
+    background-color: #F5F5F5;
+    float: left;
+    height: 300px;
+    margin-bottom: 25px;
+    margin-left: 22px;
+    margin-top: 40px;
+    width: 65px;
+    overflow-y: auto;
+}
+
+.force-overflow {
+    width: 6px;
+    background-color: transparent;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color:transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 
 
 /* .arrowDown {
