@@ -45,7 +45,7 @@ if (!__DebuxHasRun) {
       devTools.onCommitFiberRoot = (function (original) {
         return function (...args) {
           __DebuxFiberDOM = args[1];
-          if (__DebuxDebugMode) console.log('DOM: ', __DebuxFiberDOM);
+          // if (__DebuxDebugMode) console.log('DOM: ', __DebuxFiberDOM);
           traverse16(__DebuxFiberDOM);
           return original(...args);
         };

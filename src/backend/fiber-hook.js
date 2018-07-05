@@ -73,7 +73,6 @@ export const recur16 = (node, parentArr) => {
   // console.log('node: ', node);
   if (node.type && node.type.propTypes) {
     if (node.type.propTypes.hasOwnProperty('store')) {
-      // console.log('node.stateNode.store.getState(): ', node.stateNode.store.getState());
       _DebuxStore = node.stateNode.store.getState();
     }
   }
@@ -104,10 +103,9 @@ export const traverse16 = (fiberDOM) => {
   const data = {
     data: components,
     store: _DebuxStore,
-    reduxStore: window.__DEBUX_STORE_TRACKER__
   };
   data.data = data.data[0].children[0].children;
-  const DebuxData = { data: components, store: _DebuxStore, reduxStore: window.__DEBUX_STORE_TRACKER__};
+  const DebuxData = { data: components, store: _DebuxStore};
   const clone = JSON.parse(JSON.stringify(DebuxData));
   if (_DebuxDebugMode) console.log('[Debux] retrieved data --> posting to content-scripts...: ', DebuxData);
   if (_DebuxDebugMode) console.log('[Debux] SENDING -> ', clone);

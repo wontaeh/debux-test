@@ -1,0 +1,82 @@
+import React, { Component } from 'react';
+import ChartWindow from './ChartWindow';
+import InfoWindow from './InfoWindow';
+import LogWindow from './LogWindow';
+
+class MainDisplay extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      datailInfo: [],
+      displayTreeL: 'Tree', // Default
+      displayTreeR: 'Tree', // Dafault
+    };
+  }
+
+  onMouseOver = (nodeId, evt) => {
+    const propObjs = {
+      Component: nodeId.name,
+      State: nodeId.state,
+      Props: nodeId.props,
+    }
+    this.setState({
+      datailInfo: [propObjs]
+    });
+  }
+
+  onMouseOverStore = (nodeId, evt) => {
+    const propObjs = {};
+    const detailInfo = nodeId.detail;
+    if(detailInfo) {
+      for(let key in detailInfo) {
+        propObjs[key] = detailInfo[key];
+      }
+    } else {
+      propObjs.name = nodeId.name;
+    }
+    this.setState({
+      datailInfo: [propObjs]
+    });
+  }
+
+  dropDownHandleClickL = (type) => {
+    this.setState({
+      displayTreeL: type,
+    });
+  }
+  dropDownHandleClickR = (type) => {
+    this.setState({
+      displayTreeR: type,
+    });
+  }
+
+
+  render() {
+    return (
+      <div>
+        <div className="rowCols">
+          <ChartWindow 
+            treeType='Components:' 
+            treeData={this.props.treeData} 
+            onMouseOver={this.onMouseOver} 
+            dropDownHandleClick={this.dropDownHandleClickL} 
+            displayType={this.state.displayTreeL} 
+            stateAndProps={this.props.stateAndProps}/>
+          <ChartWindow 
+            treeType='Store:' 
+            storeData={this.props.storeData} 
+            onMouseOverStore={this.onMouseOverStore} 
+            dropDownHandleClick={this.dropDownHandleClickR} 
+            displayType={this.state.displayTreeR} 
+            stateAndPropsStore={this.props.stateAndPropsStore}/>
+        </div>
+        <div className="rowCols">
+          <InfoWindow allStateAndPropsData={this.state.datailInfo}/>
+          <LogWindow memory={this.props.memory}/>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default MainDisplay;

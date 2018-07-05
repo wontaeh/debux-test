@@ -6,6 +6,7 @@ import LogWindow from '../components/LogWindow';
 import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
+import MainDisplay from '../components/MainDisplay';
 
 let curData;
 //styles
@@ -33,7 +34,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null, 
+      treeData: null, 
       storeHistory: [],
       stateAndProps: [],
       displayTypeR: 'Tree',
@@ -42,7 +43,6 @@ class App extends Component {
   }
 
   makePropsData = (data, arr) => {
-    console.log('In makePropsData - data: ', data);
     if (data.name === undefined) return;
     const propObjs = {
       Component: data.name,
@@ -75,7 +75,6 @@ class App extends Component {
     data.children.forEach((child) => {
       this.makeTreeData(child, newObj.children);
     });
-
   }
 
   filterDOM = (data, arr) => {
@@ -103,27 +102,31 @@ class App extends Component {
 
   // Using react global hook store prop
   storeDataToTree = (data, arr) => {
-    console.log('In storeDataToTree - data: ', data);
     let storeStart = {
       name : 'Store',
       children : []
     };
-    let keys = Object.keys(data);
-    keys.forEach((prop)=> {
-      let child = [];
-      this.recStore(data[prop], child);
-      let newObj = {
-        name: prop,
-        children: child
+    if(typeof data === 'object' && !Array.isArray(data)){
+      for(let prop in data) {
+        let newObj = {
+          name: prop,
+          children: []
+        }
+        this.recStore(data[prop], newObj.children);
+        storeStart.children.push(newObj);
       }
-      storeStart.children.push(newObj);
-    });
-    arr.push(storeStart);
+      arr.push(storeStart);
+    } else {
+      console.log('Redux store does not exist.');
+    }
   }
 
   recStore = (obj, child) => {
     if(!obj) return;
-    if(typeof obj === 'object' && !Array.isArray(obj)) {
+    if(Array.isArray(obj)) {
+      // 
+    }
+    else if(typeof obj === 'object') {
       for(let key in obj) {
         if(Array.isArray(obj[key])) {
           let newObj = {
@@ -136,14 +139,27 @@ class App extends Component {
               children: [],
               detail: el,
             }
-            if(typeof el === 'object') {
-              this.recStore(el, newObj2.children);
-            }
+            if(typeof el === 'object') this.recStore(el, newObj2.children);
             newObj.children.push(newObj2);
           });
           child.push(newObj);
         } else if(typeof obj[key] === 'object') {
-
+          let newObj = {
+            name: key,
+            children: [],
+            detail: {},
+          };
+          newObj.detail[key] = obj[key];
+          for(let prop in obj[key]) {
+            let newObj2 = {
+              name: prop,
+              children: [],
+              detail: obj[key][prop],
+            };
+            if(typeof obj[key][prop] === 'object') this.recStore(obj[key][prop], newObj2.children);
+            newObj.children.push(newObj2);
+          }
+          child.push(newObj);
         } else {
           let newObj = {
             name: key,
@@ -154,98 +170,80 @@ class App extends Component {
           child.push(newObj);
         }
       }
+    } else {
+      
     }
   }
 
   handleClick = (str) => {
-    const port = chrome.extension.connect({ name: 'debux-test' });
-    port.postMessage({
-      name: 'connect',
-      tabId: chrome.devtools.inspectedWindow.tabId,
-    });
-    port.onMessage.addListener((msg) => {
-      if (!msg.data) return; // abort if data not present, or if not of type object
-      if (typeof msg !== 'object') return;
-      curData = msg; // assign global data object
-    });
+    clearInterval(this.update);
+    this.update = setInterval( () => this.updateTree(str), 100);
+  }
 
-    if(curData.data) {
-      let updateData = curData.data[0];
-      let treeData = [];
-      let propsData = [];
-      if(str === 'dom') this.makeTreeData(updateData, treeData);
-      if(str === 'component') this.filterDOM(updateData, treeData);
+  logTest = () => {
 
-      let stateAndPropsData = [];
-      if(str === 'props') this.makePropsData(updateData, stateAndPropsData);
-      if(treeData.length) {
-        this.setState({
-          data: treeData,
-        });
+  }
+
+  updateTree = (str) => {
+    if(curData) {
+      if(curData.data) {
+        let updateData = curData.data[0];
+        let propsData = [];
+        let treeData = [];
+        if(str === 'dom') this.makeTreeData(updateData, treeData);
+        else if(str === 'component') this.filterDOM(updateData, treeData);
+        else {
+          this.filterDOM(updateData, treeData);
+          this.makePropsData(updateData, propsData);
+        }
+        if(treeData.length) {
+          this.setState({
+            treeData: treeData,
+          });
+        }
+        if(propsData.length) {
+          this.setState({
+            stateAndProps: propsData,
+          });
+        }
       }
-      if(stateAndPropsData.length) {
-        this.setState({
-          stateAndProps: stateAndPropsData
-        });
+      if(curData.store){
+        let storeData = [];
+        this.storeDataToTree(curData.store, storeData);
+        if(storeData.length) {
+          this.setState({
+            storeHistory: storeData,
+            stateAndPropsStore: [curData.store],
+          });
+        }
       }
     }
+  }
 
-    if(curData.store){
-      let storeData = [];
-      if(str === 'store') this.storeDataToTree(curData.store, storeData);
-      if(storeData.length) {
-        this.setState({
-          storeHistory: storeData
-        });
-      }
+  componentDidMount = () => {
+    this.update = setInterval( () => this.updateTree(), 100);
+  }
+  componentWillUnmount() {
+    clearInterval(this.update);
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if(JSON.stringify(this.state.storeHistory) !== JSON.stringify(nextState.storeHistory)) {
+      let updateMemory = this.state.memory.slice();
+      let memoryObj = {};
+      memoryObj.data = curData;
+      memoryObj.store = curData.store;
+      memoryObj.count = updateMemory.length;
+      updateMemory.push(memoryObj);
+      this.setState({
+        memory: updateMemory
+      });
     }
+    return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
-
-  onMouseOver = (nodeId, evt) => {
-    const propObjs = {
-      Component: nodeId.name,
-      State: nodeId.state,
-      Props: nodeId.props,
-    }
-    this.setState({
-      stateAndProps: [propObjs]
-    });
-  }
-
-  onMouseOverStore = (nodeId, evt) => {
-    console.log("nodeId: ", nodeId, " evt: ", evt);
-    const propObjs = {};
-    const detailInfo = nodeId.detail;
-    if(detailInfo) {
-      for(let key in detailInfo) {
-        propObjs[key] = detailInfo[key];
-      }
-    } else {
-      propObjs.name = nodeId.name;
-    }
-    this.setState({
-      stateAndProps: [propObjs]
-    });
-  }
-  onMouseOutStore = () => {
-    console.log('onMouseOut!');
-  }
-  //
-  dropDownHandleClickR = (type) => {
-    this.setState({
-      displayTypeR: type,
-    });
-    // this.state.displayTypeR = type;
-  }
-
-  dropDownHandleClickL = (type) => {
-    this.setState({
-      displayTypeL: type,
-    });
-    // this.state.displayTypeL = type;
-  }
-
+  
   render() {
+    console.log("this.state.stateAndProps:", this.state.stateAndProps)
     return (
       <div className='appWindow'>
         <NavBar/>
@@ -253,17 +251,13 @@ class App extends Component {
         <span> </span>
         <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
         <span> </span>
-        <button className="button" onClick={()=>this.handleClick('store')}>Store</button>
-        <span> </span>
-        <button className="button" onClick={this.handleClick.bind(this, 'props')}>Show Props</button>
-        <div className="rowCols">
-          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClickL} displayType={this.state.displayTypeL} allStateAndPropsData={this.state.stateAndProps}/>
-          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOverStore={this.onMouseOverStore} onMouseOutStore={this.onMouseOutStore} dropDownHandleClick={this.dropDownHandleClickR} displayType={this.state.displayTypeR} allStateAndPropsData={this.state.stateAndProps}/>
-        </div>
-        <div className="rowCols">
-          <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>
-          <LogWindow/>
-        </div>
+        <button className="button" onClick={()=>this.logTest()}>Log test</button>
+        <MainDisplay 
+          treeData={this.state.treeData} 
+          storeData={this.state.storeHistory} 
+          memory={this.state.memory} 
+          stateAndProps={this.state.stateAndProps} 
+          stateAndPropsStore={this.state.stateAndPropsStore}/>
         <br />
       </div>
     );
