@@ -3,10 +3,11 @@
 /** function to inject traversal script into running tab's context */
 function injectScript(file, node) {
   const th = document.getElementsByTagName(node)[0];
-  const s = document.createElement('script');
-  s.setAttribute('type', 'text/javascript');
-  s.setAttribute('src', file);
-  th.appendChild(s);
+  console.log('injectScript, th: ', th);
+  const scriptFile = document.createElement('script');
+  scriptFile.setAttribute('type', 'text/javascript');
+  scriptFile.setAttribute('src', file);
+  th.appendChild(scriptFile);
 }
 
 // Listening for events emitted from user's application *window.postMessage()*

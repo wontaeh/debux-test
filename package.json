@@ -28,7 +28,8 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
-    "d3": "^5.5.0",
-    "react-d3-tree": "^1.10.6"
+    "prop-types": "^15.6.2",
+    "react-d3-tree": "^1.10.6",
+    "react-transition-group": "^2.4.0"
   }
 }
