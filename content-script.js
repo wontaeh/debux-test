@@ -1,5 +1,7 @@
-//  Created by Grant Kang, William He, and David Sally on 9/10/17.
-//  Copyright © 2018 React Sight. All rights reserved.
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
 /** function to inject traversal script into running tab's context */
 function injectScript(file, node) {
   const th = document.getElementsByTagName(node)[0];

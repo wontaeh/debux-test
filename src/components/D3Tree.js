@@ -1,6 +1,9 @@
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
 import React, { Component } from 'react';
 import Tree from 'react-d3-tree';
-
 
 class D3Tree extends Component {
   constructor(props) {
@@ -10,9 +13,7 @@ class D3Tree extends Component {
   
   render() {
     const svgStyleObj = {
-      // fontColor: 'white',
       fill: '#90d9ed',
-      // stroke: '#53C4C1',
       fontSize: '40',
     };
     const svgStyleObj2 = {
@@ -24,9 +25,7 @@ class D3Tree extends Component {
       fontSize: '40',
     }
 
-    //
     const styles = {
-      // links: svgStyleObj,
       nodes: {
         node: {
           circle: svgStyleObj2,

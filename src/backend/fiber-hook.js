@@ -1,3 +1,8 @@
+/*  ************************************************************************
+ * Created by Wontae Han, Alejandro Romero, Shafayat Alam and Jeff Schrock.
+ * Copyright © 2018 De-Bux. All rights reserved.
+ **************************************************************************/
+
 /* eslint brace-style: off, camelcase: off, max-len: off, no-prototype-builtins: off, no-restricted-syntax: off, consistent-return: off, no-inner-declarations: off */
 /* eslint no-use-before-define: off, no-var: off */
 import { parseFunction } from './common';
