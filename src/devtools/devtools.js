@@ -35,7 +35,9 @@ class App extends Component {
     this.state = {
       data: null, 
       storeHistory: [],
-      stateAndProps: []
+      stateAndProps: [],
+      displayTypeR: 'Tree',
+      displayTypeL: 'Tree'
     };
   }
 
@@ -229,8 +231,18 @@ class App extends Component {
     console.log('onMouseOut!');
   }
   //
-  dropDownHandleClick = () => {
-    console.log("Drop Down Handle Click Was Clicked");
+  dropDownHandleClickR = (type) => {
+    this.setState({
+      displayTypeR: type,
+    });
+    // this.state.displayTypeR = type;
+  }
+
+  dropDownHandleClickL = (type) => {
+    this.setState({
+      displayTypeL: type,
+    });
+    // this.state.displayTypeL = type;
   }
 
   render() {
@@ -245,8 +257,8 @@ class App extends Component {
         <span> </span>
         <button className="button" onClick={this.handleClick.bind(this, 'props')}>Show Props</button>
         <div className="rowCols">
-          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClick}/>
-          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOverStore={this.onMouseOverStore} onMouseOutStore={this.onMouseOutStore} dropDownHandleClick={this.dropDownHandleClick}/>
+          <ChartWindow treeType='Components:' treeData={this.state.data} onMouseOver={this.onMouseOver} dropDownHandleClick={this.dropDownHandleClickL} displayType={this.state.displayTypeL} allStateAndPropsData={this.state.stateAndProps}/>
+          <ChartWindow treeType='Store:' storeData={this.state.storeHistory} onMouseOverStore={this.onMouseOverStore} onMouseOutStore={this.onMouseOutStore} dropDownHandleClick={this.dropDownHandleClickR} displayType={this.state.displayTypeR} allStateAndPropsData={this.state.stateAndProps}/>
         </div>
         <div className="rowCols">
           <InfoWindow allStateAndPropsData={this.state.stateAndProps}/>

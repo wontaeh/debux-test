@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-// import Tree from 'react-d3-tree';
-import Tree from './D3/Tree';
+import Tree from 'react-d3-tree';
+//import Tree from './D3/Tree/index.js';
 // import { layout, select, behavior, event } from 'd3';
 
 
 class D3Tree extends Component {
   constructor(props) {
     super(props);
-    // Tree.defaultProps.orientation = 'vertical'
+    Tree.defaultProps.orientation = 'vertical'
 
   }
   

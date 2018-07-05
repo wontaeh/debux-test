@@ -1,6 +1,6 @@
 .nodeBase {
   cursor: pointer;
-  fill: rgb(137, 216, 134);
+  fill: #777;
   stroke: #000;
   stroke-width: 2;
 }
@@ -13,7 +13,7 @@
 }
 
 .nodeNameBase {
-  fill: rgb(83, 193, 212);
+  fill: #000;
   stroke: #000;
   stroke-width: 1;
 }

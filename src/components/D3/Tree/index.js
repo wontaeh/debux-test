@@ -267,26 +267,12 @@ export default class Tree extends React.Component {
    * @return {void}
    */
   handleOnMouseOverCb(nodeId, evt) {
-    const { onMouseOver, onMouseOverStore } = this.props;
+    const { onMouseOver } = this.props;
     if (onMouseOver && typeof onMouseOver === 'function') {
       const data = clone(this.state.data);
       const matches = this.findNodesById(nodeId, data, []);
       const targetNode = matches[0];
       onMouseOver(clone(targetNode), evt);
-    }
-    if (onMouseOverStore && typeof onMouseOverStore === 'function') {
-      const data = clone(this.state.data);
-      const matches = this.findNodesById(nodeId, data, []);
-      const targetNode = matches[0];
-      // var tooltip;
-      // if(targetNode.id){
-      //   tooltip = select(targetNode.id)                               // NEW
-      //     .append('g')                                                // NEW
-      //     .attr('class', 'tooltip');                                    // NEW
-      // }
-      // console.log('tooltip: ', tooltip);
-
-      onMouseOverStore(clone(targetNode), evt);
     }
   }
 
@@ -454,7 +440,7 @@ Tree.defaultProps = {
   onMouseOver: undefined,
   onMouseOut: undefined,
   onUpdate: undefined,
-  orientation: 'horizontal', //was horizontal
+  orientation: 'horizontal',
   translate: { x: 0, y: 0 },
   pathFunc: 'diagonal',
   transitionDuration: 500,

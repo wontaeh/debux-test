@@ -22,6 +22,17 @@
     height: 400px;
     /* height: 100%; */
     margin: 2px;
+    overflow: auto;
+}
+
+.chartWindowRaw {
+    border: solid 0.5px;
+    border-color: #4d92f9;
+    width: 50%;
+    height: 400px;
+    /* height: 100%; */
+    margin: 2px;
+    overflow: auto;
 }
 
 .infoWindow {
@@ -88,6 +99,9 @@
     width: 90%;
 }
 /* // */
+.stateAndPropsDiv {
+    overflow: auto;
+}
 
 
 .rowCols{
