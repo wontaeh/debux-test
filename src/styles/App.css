@@ -4,7 +4,6 @@
  * Copyright © 2018 De-Bux. All rights reserved.
  **************************************************************************/
 .appWindow {
-    /* background-color: #242d3d; */
     color: #4d92f9;
 } 
 
@@ -24,7 +23,6 @@
     border-color: #4d92f9;
     width: 50%;
     height: 400px;
-    /* height: 100%; */
     margin: 2px;
     overflow: auto;
 }
@@ -36,11 +34,9 @@
 .infoWindow {
     border: solid 0.5px;
     border-color: #4d92f9;
-    /* width: 472px; */
     width: 50%;
     height: 200px;
     margin: 2px;
-    /* height: 50%; */
     padding: 2px 2px 2px 2px;
     overflow:auto;
 }
@@ -48,10 +44,8 @@
 .logWindow {
     border: solid 0.5px;
     border-color: #4d92f9;
-    /* width: 472px; */
     width: 50%;
     height: 200px; 
-    /* height: 50%; */
     margin: 2px 2px 2px 2px;
     padding: 2px 2px 2px 2px;
     overflow:auto;
@@ -60,10 +54,8 @@
 .logWindow {
     border: solid 0.5px;
     border-color: #4d92f9;
-    /* width: 472px; */
     width: 50%;
     height: 200px; 
-    /* height: 50%; */
     margin: 2px;
     overflow:auto;
 }
@@ -81,22 +73,18 @@
     color:#75b766;
 }
 
-/* shaf's CSS */
+
 .stateAndProps {
     color: #75b766;
     font-weight: bold;
     font-size: 12px;
-    /* background:#787878;
-    background: linear-gradient(to right, #FFFFFF, #787878);; */
     margin: 2px;
     padding: 5px;
-    /* border: solid 0.5px; */
     border-bottom: solid 0.5px;
-    /* border-radius: 15px; */
     border-color: #4d92f9;
     width: 90%;
 }
-/* // */
+
 .stateAndPropsDiv {
     overflow: auto;
 }
@@ -112,13 +100,9 @@
     flex-direction:row;
     padding: 2px 2px 2px 2px;
     margin-bottom: 0px;
-    /* border-bottom: solid 0.5px #4d92f9;
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;  */
 }
 
 .toggle span{
-    /* border-bottom: solid 0.5px #4d92f9; */
     font-size: 12px;
     padding: 2px 2px 2px 2px;
     text-align: center;
@@ -171,7 +155,7 @@ i {
 }
 
 .button {
-    background-color: #008CBA; /* Green */
+    background-color: #008CBA; 
     border: none;
     color: white;
     padding: 3px 8px;
@@ -194,49 +178,22 @@ i {
 
 .force-overflow {
     width: 6px;
-    background-color: #242d3d;
+    background-color: transparent;
 }
 
-/* width */
 ::-webkit-scrollbar {
     width: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #242d3d;
+    background-color: transparent;
 }
  
-/* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    background-color: transparent;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: transparent; 
 }
-
-
-/* .arrowDown {
-    position: absolute;
-    display: block;
-    font-size: 0.7em;
-    color: #fff;
-    top: 14px;
-    right: 10px;
-
-    &.open {
-        @include transform(rotate(-180deg));
-        @include transition(transform .6s);
-    }
-    &.close {
-        @include transform(rotate(0deg));
-        @include transition(transform .6s);
-    }
-
-    &:before {
-        content: '\25BC';
-    }
-} */
