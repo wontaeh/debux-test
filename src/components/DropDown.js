@@ -9,8 +9,8 @@ const DropDown = (props) => {
     <div className="dropdown">
       <span><i className="arrowDown"></i></span>
       <div className="dropdown-content">
-        <p onClick={()=>props.dropDownHandleClick('Tree')}>Tree</p>
-        <p onClick={()=>props.dropDownHandleClick('Raw')}>Raw</p>
+        <p onClick={()=>props.dropDownHandleClick('Tree')}>Tree Chart</p>
+        <p onClick={()=>props.dropDownHandleClick('Raw')}>Raw Data</p>
       </div>
     </div>
   );
