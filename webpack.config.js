@@ -9,7 +9,8 @@ module.exports = {
   entry: {
     // app: './src/components/index.js' ,
     devtools: './src/devtools/devtools.js',
-    installHook: './src/backend/installHook.js' 
+    // installHook: './src/backend/installHook.js' 
+    hook: './src/backend/hook.js' 
   },
   // output: {
   //   path: path.resolve('./build/'),

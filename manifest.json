@@ -11,8 +11,11 @@
     "file:///*"
   ],
   "devtools_page": "devtools.html",
+  // "web_accessible_resources": [
+  //   "installHook.js"
+  // ],
   "web_accessible_resources": [
-    "installHook.js"
+    "hook.js"
   ],
   "background": {
     "scripts": [
