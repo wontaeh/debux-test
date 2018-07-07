@@ -56,7 +56,7 @@ class D3Tree extends Component {
     };
     const { treeData, storeTreeData, onMouseOver, onMouseOverStore, onMouseOutStore } = this.props;
     return (
-      <div class="treeWrapper" style={{width:'98%', height:'375px'}} ref={tc => (this.treeContainer = tc)}>
+      <div class="treeWrapper" style={{width:'98%', height:'425px'}} ref={tc => (this.treeContainer = tc)}>
         {this.props.treeData && 
           <Tree 
             data={treeData} 
