@@ -57,7 +57,7 @@ class MainDisplay extends Component {
 
   render() {
     return (
-      <div>
+      <div className="mainDiv">
         <div className="rowCols">
           <ChartWindow 
             treeType='Components:' 
