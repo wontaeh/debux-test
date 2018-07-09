@@ -6,6 +6,11 @@
     color: #4d92f9;
 } 
 
+/* .mainDiv {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-rows: repeat(2, minmax(200px, 1fr));
+} */
 
 .navBar {
     color: #4d92f9;
@@ -180,7 +185,20 @@ i {
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
+    margin-left: 2px;
 }
+
+.expandButton{
+    background-color: #008CBA; 
+    border: none;
+    color: white;
+    margin-right: 10px;
+    /* float: right; */
+}
+
+/* .expandToggle{
+    margin-left: 100px;
+} */
 
 .scrollbar {
     /* background-color: #F5F5F5; */
