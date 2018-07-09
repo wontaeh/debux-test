@@ -11,6 +11,7 @@ import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 import MainDisplay from '../components/MainDisplay';
+import { throttle } from 'lodash';
 
 let curData;
 let logMode = false;
