@@ -11,43 +11,49 @@ import '../styles/App.css';
 import NavBar from '../components/NavBar';
 import ChartWindow from '../components/ChartWindow';
 import MainDisplay from '../components/MainDisplay';
-import { throttle } from 'lodash';
 
 let curData;
 let logMode = false;
-let resume = false;
 //styles
 document.body.style = 'background: #242d3d;';
-chrome.devtools.panels.create(
-  'debux-test',
-  null, // icon
-  'devtools.html',
-  () => {
-    const port = chrome.extension.connect({ name: 'debux-test' });
-    port.postMessage({
-      name: 'connect',
-      tabId: chrome.devtools.inspectedWindow.tabId,
-    });
-    port.onMessage.addListener((msg) => {
-      if (!msg.data) return; // abort if data not present, or if not of type object
-      if (typeof msg !== 'object') return;
-      curData = msg; // assign global data object
-    });
-  }
-);
 
 // Create React App Component
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: null,
       treeData: null, 
       storeHistory: [],
       stateAndProps: [],
       stateAndPropsStore: [],
       memory: [],
     };
+    chrome.devtools.panels.create(
+      'debux-test',
+      null, // icon
+      'devtools.html',
+      () => {
+        const port = chrome.extension.connect({ name: 'debux-test' });
+        port.postMessage({
+          name: 'connect',
+          tabId: chrome.devtools.inspectedWindow.tabId,
+        });
+        port.onMessage.addListener((msg) => {
+          if (!msg.data) return; // abort if data not present, or if not of type object
+          if (typeof msg !== 'object') return;
+          if(JSON.stringify(curData) !== JSON.stringify(msg)) {
+            curData = msg;
+            logMode = false;
+            clearInterval(this.update);
+            this.update = 0;    
+            this.update = setInterval( () => this.updateTree(), 100);
+          }
+        });
+      }
+    );
   }
+  
 
   makePropsData = (data, arr) => {
     if (data.name === undefined) return;
@@ -184,12 +190,13 @@ class App extends Component {
 
   handleClick = (str) => {
     clearInterval(this.update);
+    this.update = 0;
     this.update = setInterval( () => this.updateTree(str), 100);
   }
 
   handleClickLog = (stateData) => {
-    console.log('In logclick, state: ', stateData);
     clearInterval(this.update);
+    this.update = 0;
     logMode = true;
     this.setState({
       treeData: stateData.treeData, 
@@ -197,13 +204,6 @@ class App extends Component {
       stateAndProps: stateData.stateAndProps,
       stateAndPropsStore: stateData.stateAndPropsStore,
     });
-  }
-
-  handleClickResume = () => {
-    clearInterval(this.update);
-    this.update = setInterval( () => this.updateTree(), 100);
-    logMode = false;
-    resume = true;
   }
 
   updateTree = (str) => {
@@ -242,11 +242,13 @@ class App extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.update = setInterval( () => this.updateTree(), 100);
-  }
+  // componentDidMount = () => {
+  //   this.update = setInterval( () => this.updateTree(), 100);
+  // }
+
   componentWillUnmount() {
     clearInterval(this.update);
+    this.update = 0;
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -256,12 +258,13 @@ class App extends Component {
       memoryObj.state = Object.assign({}, nextState);
       memoryObj.count = updateMemory.length +1;
       updateMemory.push(memoryObj);
-      if(!logMode && !resume) {
+      if(!logMode) {
         this.setState({
           memory: updateMemory
         });
       }
-      if(resume) resume = false;
+      clearInterval(this.update);
+      this.update = 0;
     }    
     return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
@@ -282,7 +285,6 @@ class App extends Component {
           stateAndProps={this.state.stateAndProps} 
           stateAndPropsStore={this.state.stateAndPropsStore}
           handleClickLog={this.handleClickLog}
-          handleClickResume={this.handleClickResume}
           handleClick={this.handleClick}/>
         <br />
       </div>

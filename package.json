@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,7 +30,6 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react-d3-tree": "^1.10.6",
     "react-transition-group": "^2.4.0"

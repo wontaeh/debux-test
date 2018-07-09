@@ -12,7 +12,6 @@ const LogWindow = (props) => {
   return (
     <div className="logWindow">
       Logs:
-      <button onClick={props.handleClickResume}>RESUME</button>
       {/* {logDisplay} */}
       <Logs memory={props.memory} handleClickLog={props.handleClickLog}/>
     </div>

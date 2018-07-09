@@ -3,20 +3,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  // entry: [
-  //   path.resolve('./src/components/index.js')
-  // ],
   entry: {
-    // app: './src/components/index.js' ,
     devtools: './src/devtools/devtools.js',
-    // installHook: './src/backend/installHook.js' 
-    hook: './src/backend/hook.js' 
+    hook: './src/backend/hook.js' ,
   },
-  // output: {
-  //   path: path.resolve('./build/'),
-  //   filename: 'app.js',
-  //   publicPath: '.'
-  // },
   output: {
     path: path.resolve('./build/'),
     filename: '[name].js',
