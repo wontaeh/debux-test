@@ -57,7 +57,7 @@ class MainDisplay extends Component {
 
   render() {
     return (
-      <div>
+      <div className="mainDiv">
         <div className="rowCols">
           <ChartWindow 
             treeType='Components:' 
@@ -76,7 +76,7 @@ class MainDisplay extends Component {
         </div>
         <div className="rowCols">
           <InfoWindow allStateAndPropsData={this.state.datailInfo}/>
-          <LogWindow memory={this.props.memory}/>
+          <LogWindow memory={this.props.memory} handleClickLog={this.props.handleClickLog} handleClickResume={this.props.handleClickResume}/>
         </div>
       </div>
     );
