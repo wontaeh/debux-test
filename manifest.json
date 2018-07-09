@@ -10,6 +10,16 @@
     "https://*/*",
     "file:///*"
   ],
+  "icons": { "16": "img/DebuxLogo16.png",
+    "48": "img/DebuxLogo48.png",
+   "128": "img/DebuxLogo128.png" },
+   "browser_action": {
+    "default_icon": {
+      "16": "img/DebuxLogo16.png",
+      "48": "img/DebuxLogo48.png",
+      "128": "img/DebuxLogo128.png"
+    }
+  },
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     "hook.js"

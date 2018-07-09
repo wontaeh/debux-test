@@ -40,7 +40,8 @@ const ChartWindow = (props) => {
       <Toggle 
       treeType={props.treeType} 
       treeData={props.treeData} 
-      dropDownHandleClick={props.dropDownHandleClick}/>
+      dropDownHandleClick={props.dropDownHandleClick}
+      handleClick={props.handleClick}/>
       <div className="chartWindowDisplay">
         {displayTree}
         {stateAndPropsList}

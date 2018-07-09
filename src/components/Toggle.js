@@ -8,6 +8,19 @@ import ExpandToggle from './ExpandToggle';
 
 
 const Toggle = (props) => {
+  if (props.treeType === "Components:"){
+    return (
+      <div className='toggle'>
+        {/* <ExpandToggle/> */}
+        <span>{props.treeType}</span>
+        <DropDown dropDownHandleClick={props.dropDownHandleClick}/>
+        <div className="buttonDiv">
+          <button className="button" onClick={()=>props.handleClick('dom')}>DOMs</button>
+          <button className="button" onClick={()=>props.handleClick('component')}>Components</button>
+        </div>
+        </div>
+  );
+  } else {
   return (
     <div className='toggle'>
       {/* <ExpandToggle/> */}
@@ -15,6 +28,7 @@ const Toggle = (props) => {
       <DropDown dropDownHandleClick={props.dropDownHandleClick}/>
     </div>
   );
+}
 };
 
 export default Toggle;
