@@ -11,9 +11,10 @@ const LogWindow = (props) => {
 //   });
   return (
     <div className="logWindow">
-      Logs:  
+      Logs:
+      <button onClick={props.handleClickResume}>RESUME</button>
       {/* {logDisplay} */}
-      <Logs/>
+      <Logs memory={props.memory} handleClickLog={props.handleClickLog}/>
     </div>
   );
 };
