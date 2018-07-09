@@ -6,16 +6,21 @@
     color: #4d92f9;
 } 
 
-/* .mainDiv {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    grid-template-rows: repeat(2, minmax(200px, 1fr));
-} */
+.buttonDiv {
+    margin-left: 20px;
+    overflow: hidden;
+}
 
 .navBar {
     color: #4d92f9;
     border-bottom: solid 0.5px #4d92f9;
     margin-bottom: 2px;
+    display:flex; 
+    flex-direction:row;
+}
+
+.logo {
+    margin-left: 5px;
 }
 
 .navBar h1{
@@ -29,7 +34,6 @@
     width: 50%;
     height: 450px;
     margin: 2px;
-
 }
 
 .chartWindowDisplay {
@@ -118,10 +122,7 @@ ul {
     flex-direction:row;
     padding: 2px 2px 2px 2px;
     margin: 1px 1px 0px 1px;
-    /* margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 1px; */
-    height: 18px;
+    height: 20px;
     background-color: #1d2430;
 }
 
@@ -178,15 +179,16 @@ i {
 }
 
 .button {
-    background-color: #008CBA; 
+    background-color: transparent; 
     border: none;
-    color: white;
+    color: #4d92f9;
     padding: 3px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
     margin-left: 2px;
+    margin-top: 2px;
 }
 
 .expandButton{

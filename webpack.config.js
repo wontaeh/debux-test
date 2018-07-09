@@ -37,6 +37,16 @@ module.exports = {
         test: /\.css/,
         loaders: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,  
+        use: [{
+            loader: 'url-loader',
+            options: { 
+                // limit: 8000, // Convert images < 8kb to base64 strings
+                name: 'images/[hash]-[name].[ext]'
+            } 
+        }]
+     }
     ]
   },
   resolve: {
@@ -48,6 +58,7 @@ module.exports = {
       { from: './src/devtools/devtools.html', to: 'devtools.html' },
       { from: './background.js', to: 'background.js' },
       { from: './content-script.js', to: 'content-script.js' },
+      { from: './src/img', to: 'img' },
     ]),
   ],
 };
