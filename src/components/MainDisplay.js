@@ -74,6 +74,10 @@ class MainDisplay extends Component {
             displayType={this.state.displayTreeR} 
             stateAndPropsStore={this.props.stateAndPropsStore}/>
         </div>
+        <button className="button" onClick={()=>this.props.handleClick('dom')}>DOMs</button>
+        <span> </span>
+        <button className="button" onClick={()=>this.props.handleClick('component')}>Components</button>
+        <span> </span>
         <div className="rowCols">
           <InfoWindow allStateAndPropsData={this.state.datailInfo}/>
           <LogWindow memory={this.props.memory} handleClickLog={this.props.handleClickLog} handleClickResume={this.props.handleClickResume}/>

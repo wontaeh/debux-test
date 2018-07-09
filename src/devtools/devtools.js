@@ -269,9 +269,11 @@ class App extends Component {
     return (
       <div className='appWindow'>
         <NavBar/>
-        <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
+        {/* <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
         <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
+        <span> </span> */}
+        {/* <button className="button" onClick={()=>this.logTest()}>Log test</button> */}
         <MainDisplay 
           treeData={this.state.treeData} 
           storeData={this.state.storeHistory} 
@@ -280,7 +282,7 @@ class App extends Component {
           stateAndPropsStore={this.state.stateAndPropsStore}
           handleClickLog={this.handleClickLog}
           handleClickResume={this.handleClickResume}
-          />
+          handleClick={this.handleClick}/>
         <br />
       </div>
     );

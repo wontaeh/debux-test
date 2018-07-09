@@ -6,6 +6,11 @@
     color: #4d92f9;
 } 
 
+/* .mainDiv {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-rows: repeat(2, minmax(200px, 1fr));
+} */
 
 .navBar {
     color: #4d92f9;
@@ -112,9 +117,10 @@ ul {
     display:flex; 
     flex-direction:row;
     padding: 2px 2px 2px 2px;
-    margin-top: 0px;
+    margin: 1px 1px 0px 1px;
+    /* margin-top: 0px;
     margin-bottom: 0px;
-    margin-left: 1px;
+    margin-left: 1px; */
     height: 18px;
     background-color: #1d2430;
 }
@@ -180,7 +186,20 @@ i {
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
+    margin-left: 2px;
 }
+
+.expandButton{
+    background-color: #008CBA; 
+    border: none;
+    color: white;
+    margin-right: 10px;
+    /* float: right; */
+}
+
+/* .expandToggle{
+    margin-left: 100px;
+} */
 
 .scrollbar {
     /* background-color: #F5F5F5; */
