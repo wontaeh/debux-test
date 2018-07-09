@@ -250,17 +250,18 @@ class App extends Component {
     return (
       <div className='appWindow'>
         <NavBar/>
-        <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
+        {/* <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
         <span> </span>
         <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
-        <span> </span>
-        <button className="button" onClick={()=>this.logTest()}>Log test</button>
+        <span> </span> */}
+        {/* <button className="button" onClick={()=>this.logTest()}>Log test</button> */}
         <MainDisplay 
           treeData={this.state.treeData} 
           storeData={this.state.storeHistory} 
           memory={this.state.memory} 
           stateAndProps={this.state.stateAndProps} 
-          stateAndPropsStore={this.state.stateAndPropsStore}/>
+          stateAndPropsStore={this.state.stateAndPropsStore}
+          handleClick={this.handleClick}/>
         <br />
       </div>
     );

@@ -3,18 +3,13 @@
  * Copyright © 2018 De-Bux. All rights reserved.
  **************************************************************************/
 import React from 'react';
-import DropDown from './DropDown';
-import ExpandToggle from './ExpandToggle';
 
-
-const Toggle = (props) => {
+const ExpandToggle = (props) => {
   return (
-    <div className='toggle'>
-      {/* <ExpandToggle/> */}
-      <span>{props.treeType}</span>
-      <DropDown dropDownHandleClick={props.dropDownHandleClick}/>
+    <div className="expandToggle">
+      <button className="expandButton">+</button>
     </div>
   );
 };
 
-export default Toggle;
+export default ExpandToggle;
