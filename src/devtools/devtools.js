@@ -13,6 +13,8 @@ import ChartWindow from '../components/ChartWindow';
 import MainDisplay from '../components/MainDisplay';
 
 let curData;
+let logMode = false;
+let resume = false;
 //styles
 document.body.style = 'background: #242d3d;';
 chrome.devtools.panels.create(
@@ -184,16 +186,31 @@ class App extends Component {
     this.update = setInterval( () => this.updateTree(str), 100);
   }
 
-  logTest = () => {
+  handleClickLog = (stateData) => {
+    console.log('In logclick, state: ', stateData);
+    clearInterval(this.update);
+    logMode = true;
+    this.setState({
+      treeData: stateData.treeData, 
+      storeHistory: stateData.storeHistory,
+      stateAndProps: stateData.stateAndProps,
+      stateAndPropsStore: stateData.stateAndPropsStore,
+    });
+  }
 
+  handleClickResume = () => {
+    clearInterval(this.update);
+    this.update = setInterval( () => this.updateTree(), 100);
+    logMode = false;
+    resume = true;
   }
 
   updateTree = (str) => {
     if(curData) {
       if(curData.data) {
         let updateData = curData.data[0];
-        let propsData = [];
         let treeData = [];
+        let propsData = [];
         if(str === 'dom') this.makeTreeData(updateData, treeData);
         else if(str === 'component') this.filterDOM(updateData, treeData);
         else {
@@ -235,14 +252,16 @@ class App extends Component {
     if(JSON.stringify(this.state.storeHistory) !== JSON.stringify(nextState.storeHistory)) {
       let updateMemory = this.state.memory.slice();
       let memoryObj = {};
-      memoryObj.data = curData;
-      memoryObj.store = curData.store;
-      memoryObj.count = updateMemory.length;
+      memoryObj.state = Object.assign({}, nextState);
+      memoryObj.count = updateMemory.length +1;
       updateMemory.push(memoryObj);
-      this.setState({
-        memory: updateMemory
-      });
-    }
+      if(!logMode && !resume) {
+        this.setState({
+          memory: updateMemory
+        });
+      }
+      if(resume) resume = false;
+    }    
     return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
 
@@ -261,6 +280,8 @@ class App extends Component {
           memory={this.state.memory} 
           stateAndProps={this.state.stateAndProps} 
           stateAndPropsStore={this.state.stateAndPropsStore}
+          handleClickLog={this.handleClickLog}
+          handleClickResume={this.handleClickResume}
           handleClick={this.handleClick}/>
         <br />
       </div>

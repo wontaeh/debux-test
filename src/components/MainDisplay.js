@@ -80,7 +80,7 @@ class MainDisplay extends Component {
         <span> </span>
         <div className="rowCols">
           <InfoWindow allStateAndPropsData={this.state.datailInfo}/>
-          <LogWindow memory={this.props.memory}/>
+          <LogWindow memory={this.props.memory} handleClickLog={this.props.handleClickLog} handleClickResume={this.props.handleClickResume}/>
         </div>
       </div>
     );
