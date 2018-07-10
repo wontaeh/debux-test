@@ -17,7 +17,9 @@ const InfoWindow = (props) => {
   return (
     <div className='infoWindow'> 
       Detailed Info:
-      {stateAndPropsList}
+      <div className='infoWindowDisplay'>
+        {stateAndPropsList}
+      </div>
     </div>
   )
 };

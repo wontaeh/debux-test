@@ -6,14 +6,12 @@ import React from 'react';
 import Logs from './Logs';
 
 const LogWindow = (props) => {
-//   let logDisplay = props.memory.map((el)=>{
-//     return <pre >{el.count}  {JSON.stringify(el.store, undefined, 2)} </pre>
-//   });
   return (
     <div className="logWindow">
       Logs:
-      {/* {logDisplay} */}
-      <Logs memory={props.memory} handleClickLog={props.handleClickLog}/>
+      <div className='infoWindowDisplay'>
+        <Logs memory={props.memory} handleClickLog={props.handleClickLog}/>
+      </div>
     </div>
   );
 };

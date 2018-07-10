@@ -54,7 +54,6 @@ class App extends Component {
     );
   }
   
-
   makePropsData = (data, arr) => {
     if (data.name === undefined) return;
     const propObjs = {
@@ -112,7 +111,6 @@ class App extends Component {
       });
     }
   }
-
   // Using react global hook store prop
   storeDataToTree = (data, arr) => {
     let storeStart = {
@@ -242,10 +240,6 @@ class App extends Component {
     }
   }
 
-  // componentDidMount = () => {
-  //   this.update = setInterval( () => this.updateTree(), 100);
-  // }
-
   componentWillUnmount() {
     clearInterval(this.update);
     this.update = 0;
@@ -273,11 +267,6 @@ class App extends Component {
     return (
       <div className='appWindow'>
         <NavBar/>
-        {/* <button className="button" onClick={()=>this.handleClick('dom')}>DOMs</button>
-        <span> </span>
-        <button className="button" onClick={()=>this.handleClick('component')}>Components</button>
-        <span> </span> */}
-        {/* <button className="button" onClick={()=>this.logTest()}>Log test</button> */}
         <MainDisplay 
           treeData={this.state.treeData} 
           storeData={this.state.storeHistory} 

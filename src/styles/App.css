@@ -15,18 +15,67 @@
     color: #4d92f9;
     border-bottom: solid 0.5px #4d92f9;
     margin-bottom: 2px;
-    display:flex; 
+    display:block; 
     flex-direction:row;
+    height: 45px;
 }
 
 .logo {
     margin-left: 5px;
 }
 
-.navBar h1{
-    margin-bottom: 3px;
-    margin-top: 3px;
+.navBar span{
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1em;
+    padding-top: 15px;
 }
+
+/*=================Hamburger Menu=================*/
+.optionbtn div{
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+}
+
+.options {
+    display: block;
+    float: right;
+}
+
+.options-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.options-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.options-content a:hover {
+	background-color: #f1f1f1
+}
+
+.options:hover .options-content {
+    display: block;
+}
+
+.options:hover .optionbtn div {
+    background-color: #3e8e41;
+}
+
+/*============================================*/
+
 
 .chartWindow {
     border: solid 0.5px;
@@ -37,7 +86,8 @@
 }
 
 .chartWindowDisplay {
-    height: 400px;
+    height: 399px;
+    width: 100%;
     overflow: auto;
 }
 
@@ -53,6 +103,11 @@
     margin: 2px;
     padding: 2px 2px 2px 2px;
     overflow:auto;
+}
+
+.infoWindowDisplay {
+    height: 200px;
+    overflow: auto;
 }
 
 .logWindow {
@@ -76,7 +131,7 @@
 ul {
     list-style-type: none;
     padding-left: 0px;
-
+    margin-top: 0px;
 }
 
 .logs {
@@ -100,11 +155,13 @@ ul {
     color: #75b766;
     font-weight: bold;
     font-size: 12px;
-    margin: 2px;
-    padding: 5px;
+    /* margin: 2px;
+    padding: 5px; */
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     border-bottom: solid 0.5px;
     border-color: #4d92f9;
-    width: 90%;
+    width: 100%;
 }
 
 .stateAndPropsDiv {
@@ -198,10 +255,6 @@ i {
     margin-right: 10px;
     /* float: right; */
 }
-
-/* .expandToggle{
-    margin-left: 100px;
-} */
 
 .scrollbar {
     /* background-color: #F5F5F5; */
